@@ -1,7 +1,7 @@
-# First install 'request' package by run following command 
+### First install 'request' package by run following command 
 pip insatll request
 
-# Run python script with following arguments 
+### Run python script with following arguments 
 Optional arguments (It will ask this thigs on run time if you run script without this arguments)<br/>
 2) Url link of Lynda course <br/>
 3) Directory location on your system where you want to save files(by default set to the same location as LyndaDownloader.py)<br/>
