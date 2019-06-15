@@ -15,11 +15,11 @@ python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py' 'https://www.lynda.
 
 ##### You can also run this script in android (How to run python script on android ?)
 1. Download and install **Termux** app. (remember to give storage permission from phone's settings)
-* Run following commads : 
+2. Run following commads : 
  -  `apt-get update`
  -  `apt-get install python`
  -  `pip install requests`
-* Know you can run python script on android
+3. Know you can run python script on android
 
 
 ##### For example : 
