@@ -1,11 +1,29 @@
-### First install 'request' package by run following command 
-pip insatll request
+### First install 'requests' package by runing following command 
+`pip insatll requests`
 
-### Run python script with following arguments 
-Optional arguments (It will ask this thigs on run time if you run script without this arguments)<br/>
-*2) Url link of Lynda course <br/>
-*3) Directory location on your system where you want to save files(by default set to the same location as LyndaDownloader.py)<br/>
-*4) Video quality (0 for 360p, 1 for 540p, 2 for 720p)<br/>
-*5) Starting folder number (by default set to 1)<br/>
+### Optional arguments with python script
+***If you run script without this argumentst then It will ask this thigs on run time***
+2. **Url link** of Lynda course.
+* Directory **location (Full path)** on your system where you want to save files (by default set to the same location as LyndaDownloader.py).
+* **Video quality** (0 for 360p, 1 for 540p, 2 for 720p).
+* In case you want to download only few topics by entring **starting topic number** (by default set to 1 which means start download from 1st topic of course).
+##### For example : 
+> ```python
+ python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py' 'https://www.lynda.com/C-tutorials/C-Essential-Training/772322-2.html' '/home/navpreetdevpuri/Downloads/' 2```
+
+
+##### You can also run this script in android (How to run python script on android ?)
+1. Download and install **Termux** app. (remember to give storage permission from phone's settings)
+* Run following commads : 
+ -  `apt-get update`
+ -  `apt-get install python`
+ -  `pip install requests`
+* Know you can run python script on android
+
+
+##### For example : 
+> ```python
+ python '/storage/emulated/0/Download/LyndaDownloader.py' 'https://www.lynda.com/C-tutorials/C-Essential-Training/772322-2.html' '/storage/emulated/0/Download/' 2```
+
 
 
