@@ -37,7 +37,7 @@ for i in sp:
     h[j[0]]=j[1]
 
 def validname(name):
-    return name.replace('.','').replace('|', '').replace('>', '').replace('<', '').replace('"', '').replace('?', '').replace('*', '').replace(':', '').replace('/', '').replace('\\', '')
+    return name.replace('|', '').replace('>', '').replace('<', '').replace('"', '').replace('?', '').replace('*', '').replace(':', '').replace('/', '').replace('\\', '')
 
 
 qualities=["360p","540p","720p"]
