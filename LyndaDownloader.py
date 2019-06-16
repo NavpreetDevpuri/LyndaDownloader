@@ -28,7 +28,6 @@ else:
     if temp == -1:
         temp = 0
     savedir = sys.argv[0][:temp] + "Lynda"
-print(sys.argv[0],savedir)
 start_time = time.time()
 print("Setting up...")
 h={
@@ -51,7 +50,7 @@ def download():
     if isExFile:
         print(" [" + str(bytesToMb(getFileSize(exFileLink, h))) + "Mb] Exercise File: " + exFileName)
         dowloadFile(savedir+"/"+courseName+" "+qualities[quality]+"/"+exFileName+".zip",exFileLink,h)
-    for i in range(data.__len__()):
+    for i in range(data.__len__()-1):
         folderName = data[i][0]
         os.makedirs(savedir+"/"+courseName+" "+qualities[quality]+"/"+folderName, exist_ok=True)
         print(folderName + ":")
@@ -147,7 +146,7 @@ def getCoursedetails():
             data[i - fromfolder][1].append([validname(videoname), []])
             data[i - fromfolder][1][j - 1][1].append(videoid)
             print("   "+videoname)
-    print(" ")
+    print("geed "+str(data))
 
 
 print("Connecting to Lynda.com...")
@@ -197,5 +196,6 @@ else:
     downloadsize=t720
 if isExFile:
     downloadsize+=exfilesize
+#print(data)
 download()
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
