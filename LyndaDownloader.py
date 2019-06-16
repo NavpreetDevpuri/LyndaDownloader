@@ -3,9 +3,9 @@ import os
 import sys
 import requests
 #url='https://www.lynda.com/Python-tutorials/Programming-Fundamentals-Real-World/418249-2.html'
+quality=" "
 print("Made by NavpreetDevpuri.")
 print("Enjoy ;)")
-quality=" "
 fromfolder=1
 if len(sys.argv)==5:
     fromfolder=int(sys.argv[4])
@@ -22,7 +22,6 @@ elif len(sys.argv)>=2:
 else:
     url = input("Enter Lynda.com course link: ")
     savedir = sys.argv[0][:sys.argv[0].rfind('/')] + "Lynda"
-#print(savedir, url, quality )
 start_time = time.time()
 print("Setting up...")
 headerstr='''Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
@@ -45,7 +44,6 @@ downloadedsize=0
 def download():
     print("Downloading...")
     global data,courseId,courseName,exFileId,exFileName,exFileLink,quality,qualities,downloadsize,downloadedsize,isExFile
-    #os.makedirs(savedir, exist_ok=True)
     os.makedirs(savedir+"/"+courseName+" "+qualities[quality], exist_ok=True)
     if isExFile:
         print(" [" + str(bytesToMb(getFileSize(exFileLink, h))) + "Mb] Exercise File: " + exFileName)
@@ -58,7 +56,6 @@ def download():
             videolink = data[i][1][j][1][1][quality]
             videoname = data[i][1][j][0]
             sizet=bytesToMb(data[i][1][j][1][2][quality])
-            #downloadedsize+=sizet
             print("%17s   %s.mp4 " % ("["+qualities[quality]+": "+str(sizet)+"Mb]", videoname))
             dowloadFile(savedir+"/"+courseName+" "+qualities[quality]+"/"+folderName+"/"+videoname+".mp4",videolink)
     print(courseName+" "+qualities[quality]+": ["+str(round(downloadedsize,2))+"Mb]")
@@ -84,21 +81,82 @@ def dowloadFile(name,link,header=None):
         status = round(sizet / size * 100, 3)
         downloadedsize+=s
         alloverp=round(downloadedsize/downloadsize*100,3)
-        #print('\r     ' + str(status) + "% (" + str(round(sizet / 1000000, 2)) + "Mb/" + str(
-            #round(size / 1000000, 2)) + "Mb)      [Allover:"+str(alloverp)+"% ("+str(round(bytesToMb(downloadedsize),2))+"Mb/"+str(round(bytesToMb(downloadsize),2))+"Mb)]", end=' ', flush=True)
-
         print('\r %.2f%% (%.2fMb/%.2fMb)  Allover:%.2f%% (%.2fMb/%.2fMb)' % (status , bytesToMb(sizet) , bytesToMb(size), alloverp, round(bytesToMb(downloadedsize),2),round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
 
     print(" ")
     f.close()
-#dowloadFile("yessss.mp4",'https://files3.lynda.com/secure/courses/661762/iphone_MP4/661762_01_03_XR30_MeasuringTime.mp4?cIYDwkTAaaR6fXWhNQPXMsxuWdPyB5j_vUkisfRv_NzNM_Ul6Gk73s1KkX7WsGXMDSSwZI-u5mp0Mqz-y5vYeZanotmJpShRosyCQR4tWvaySgJ_6QR8DGFc9QIyAqjeacZdP5hbW3wgGjzrxUD7YQEazgyXUP8SPrJ8b9geSWsVn3o49EdqPX8&c3.ri=3775934228715563001')
+
+def getVideosLinks():
+    print("Getting videos details...")
+    global fromfolder,data,html,t360,t540,t720
+    for i in range(data.__len__()):
+        folderName = data[i][0]
+        print(folderName + ":")
+        data.append([validname(folderName), []])
+        for j in range(data[i][1].__len__()):
+            videoid = data[i][1][j - 1][1][0]
+            videoname = data[i][1][j][0]
+            videodata = requests.request('GET',
+                                         'https://www.lynda.com/ajax/course/' + courseId + '/' + videoid + '/play',
+                                         headers=h, stream=True).json()
+            data[i][1][j - 1][1].append(
+                [videodata[0]['urls']['360'], videodata[0]['urls']['540'], videodata[0]['urls']['720']])
+            temp360 = getFileSize(videodata[0]['urls']['360'])
+            temp540 = getFileSize(videodata[0]['urls']['540'])
+            temp720 = getFileSize(videodata[0]['urls']['720'])
+            t360 += temp360
+            t540 += temp540
+            t720 += temp720
+            data[i][1][j - 1][1].append([temp360, temp540, temp720])
+            print("%45s   %s.mp4 " % (
+            "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb, 720p:" + str(
+                bytesToMb(temp720)) + "Mb]", videoname))
+    print(" ")
+    if isExFile:
+        print("Exercise File: " + exFileName + "   [" + str(bytesToMb(exfilesize)) + "Mb]")
+    print(courseName)
+    print(" Total Videos : " + str(totalVideos))
+    print("    [360p:" + str(bytesToMb(t360)) + "Mb, 540p:" + str(
+        bytesToMb(t540)) + "Mb, 720p:" + str(bytesToMb(t720)) + "Mb]")
+    data[0][0] = "0. " + data[0][0]
+    print(" ")
+
+def getCoursedetails():
+    global totalVideos,data
+    for i in range(fromfolder, list.__len__()):
+        folderName = list[i][list[i].index('<h4'):list[i].index('</h4')].split('>')[1]
+        print(folderName + ":")
+        data.append([validname(folderName), []])
+        videosList = list[i].split('row toc-items')[1].split('<li')
+        totalVideos += videosList.__len__() - 1
+        for j in range(1, videosList.__len__()):
+            temp = videosList[j].index('video-duration')
+            videoduration = videosList[j][temp+16:temp+30].split('<')[0]
+            videoid = videosList[j][videosList[j].index('"') + 1:videosList[j].index('c') - 2]
+            videoname = videosList[j][videosList[j].index('<a'):videosList[j].index('</a')].split('\\n')[1] + " (" + videoduration + ")"
+            for k in range(0, videoname.__len__()):
+                if videoname[k] == " ":
+                    continue
+                else:
+                    videoname = videoname[k:]
+                    break
+            videoname = str(j) + ". " + videoname
+            data[i - fromfolder][1].append([validname(videoname), []])
+            data[i - fromfolder][1][j - 1][1].append(videoid)
+            print("   "+videoname)
+    print(" ")
+
+
 print("Connecting to Lynda.com...")
 r = requests.request('GET', url, headers=h, stream=True)
 html=str(r.content)
 print("Collecting information...")
-courseName=html[html.index('<h1'):html.index('</h1')].split('>')[1]
+temp = html.index('timeRequired')
+courseDuration=html[temp:temp+55].split('>')[1].split('<')[0]
+courseName=html[html.index('<h1'):html.index('</h1')].split('>')[1] + " (" + courseDuration + ")"
 courseId=html[html.index("/"):html.index('ios')].split('>')[1][88:-3]
 print("###"+courseName+"#####")
+print("Getting course details...")
 isExFile=True
 try:
     start=html.index("exercise/")
@@ -123,39 +181,8 @@ t360=0
 t540=0
 t720=0
 totalVideos=0
-for i in range(fromfolder,list.__len__()):
-    folderName=list[i][list[i].index('<h4'):list[i].index('</h4')].split('>')[1]
-    print(folderName+":")
-    data.append([validname(folderName),[]])
-    videosList = list[i].split('row toc-items')[1].split('<li')
-    totalVideos+=videosList.__len__()-1
-    for j in range(1,videosList.__len__()):
-        videoid = videosList[j][videosList[j].index('"') + 1:videosList[j].index('c') - 2]
-        videoname = videosList[j][videosList[j].index('<a'):videosList[j].index('</a')].split('\\n')[1]
-        for k in range(0, videoname.__len__()):
-            if videoname[k] == " ":
-                continue
-            else:
-                videoname = videoname[k:]
-                break
-        videoname = str(j) + ". " + videoname
-        data[i-fromfolder][1].append([validname(videoname),[]])
-        data[i-fromfolder][1][j-1][1].append(videoid)
-        videodata=requests.request('GET','https://www.lynda.com/ajax/course/'+courseId+'/'+videoid+'/play', headers=h,stream=True).json()
-        data[i - fromfolder][1][j - 1][1].append(
-            [videodata[0]['urls']['360'], videodata[0]['urls']['540'], videodata[0]['urls']['720']])
-        temp360=getFileSize(videodata[0]['urls']['360'])
-        temp540=getFileSize(videodata[0]['urls']['540'])
-        temp720=getFileSize(videodata[0]['urls']['720'])
-        t360+=temp360
-        t540+=temp540
-        t720+=temp720
-        data[i - fromfolder][1][j - 1][1].append([temp360,temp540, temp720])
-        print("%45s   %s.mp4 " %("[360p:"+str(bytesToMb(temp360))+"Mb, 540p:"+str(bytesToMb(temp540))+"Mb, 720p:"+str(bytesToMb(temp720))+"Mb]",videoname))
-if isExFile:
-    print("Exercise File: "+exFileName+"   ["+str(bytesToMb(exfilesize))+"Mb]")
-print(courseName+": Total Videos: "+str(totalVideos)+"    [360p:"+str(bytesToMb(t360))+"Mb, 540p:"+str(bytesToMb(t540))+"Mb, 720p:"+str(bytesToMb(t720))+"Mb ]")
-data[0][0]="0. "+data[0][0]
+getCoursedetails()
+getVideosLinks()
 while(not (quality=="0" or quality=="1" or quality=="2")):
         quality=input("Enter video quality (0 for 360p, 1 for 540p or 2 for 720p) : ")
 quality=int(quality)
