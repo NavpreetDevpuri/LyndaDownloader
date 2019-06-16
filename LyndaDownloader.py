@@ -146,7 +146,7 @@ def getCoursedetails():
             data[i - fromfolder][1].append([validname(videoname), []])
             data[i - fromfolder][1][j - 1][1].append(videoid)
             print("   "+videoname)
-    print("geed "+str(data))
+    #print("geed "+str(data))
 
 
 print("Connecting to Lynda.com...")
