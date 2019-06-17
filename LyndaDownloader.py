@@ -96,7 +96,7 @@ def getVideosLinks():
         print(folderName + ":")
         data.append([validname(folderName), []])
         for j in range(data[i][1].__len__()):
-            videoid = data[i][1][j - 1][1][0]
+            videoid = data[i][1][j][1][0]
             videoname = data[i][1][j][0]
             videodata = requests.request('GET',
                                          'https://www.lynda.com/ajax/course/' + courseId + '/' + videoid + '/play',
