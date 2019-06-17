@@ -101,7 +101,7 @@ def getVideosLinks():
             videodata = requests.request('GET',
                                          'https://www.lynda.com/ajax/course/' + courseId + '/' + videoid + '/play',
                                          headers=h, stream=True).json()
-            data[i][1][j - 1][1].append(
+            data[i][1][j][1].append(
                 [videodata[0]['urls']['360'], videodata[0]['urls']['540'], videodata[0]['urls']['720']])
             temp360 = getFileSize(videodata[0]['urls']['360'])
             temp540 = getFileSize(videodata[0]['urls']['540'])
@@ -109,7 +109,7 @@ def getVideosLinks():
             t360 += temp360
             t540 += temp540
             t720 += temp720
-            data[i][1][j - 1][1].append([temp360, temp540, temp720])
+            data[i][1][j][1].append([temp360, temp540, temp720])
             print("%45s   %s.mp4 " % (
             "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb, 720p:" + str(
                 bytesToMb(temp720)) + "Mb]", videoname))
