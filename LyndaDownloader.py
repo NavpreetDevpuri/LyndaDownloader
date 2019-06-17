@@ -21,13 +21,18 @@ elif len(sys.argv)>=2:
     temp = sys.argv[0].rfind('/')
     if temp==-1:
         temp=0
-    savedir = sys.argv[0][:temp] + "Lynda"
+        savedir = "Lynda"
+    else:
+        savedir = sys.argv[0][:temp] + "/Lynda"
 else:
     url = input("Enter Lynda.com course link: ")
     temp = sys.argv[0].rfind('/')
     if temp == -1:
         temp = 0
-    savedir = sys.argv[0][:temp] + "Lynda"
+        savedir = "Lynda"
+    else:
+        savedir = sys.argv[0][:temp] + "/Lynda"
+#print(savedir)
 start_time = time.time()
 print("Setting up...")
 h={
@@ -54,12 +59,21 @@ def download():
         folderName = data[i][0]
         os.makedirs(savedir+"/"+courseName+" "+qualities[quality]+"/"+folderName, exist_ok=True)
         print(folderName + ":")
-        for j in range(data[i][1].__len__()):
-            videolink = data[i][1][j][1][1][quality]
-            videoname = data[i][1][j][0]
-            sizet=bytesToMb(data[i][1][j][1][2][quality])
-            print("%17s   %s.mp4 " % ("["+qualities[quality]+": "+str(sizet)+"Mb]", videoname))
-            dowloadFile(savedir+"/"+courseName+" "+qualities[quality]+"/"+folderName+"/"+videoname+".mp4",videolink)
+        for j in range(data[i][1].__len__()-1):
+            try:
+                data[i][1][j][1][1][quality]
+            except:
+                videolink = data[i][1][j][1][1][quality-1]
+                videoname = data[i][1][j][0]
+                sizet = bytesToMb(data[i][1][j][1][2][quality-1])
+                print("%17s   %s.mp4 " % ("[" + qualities[quality-1] + ": " + str(sizet) + "Mb]", videoname))
+            else:
+                videolink = data[i][1][j][1][1][quality]
+                videoname = data[i][1][j][0]
+                sizet = bytesToMb(data[i][1][j][1][2][quality])
+                print("%17s   %s.mp4 " % ("[" + qualities[quality] + ": " + str(sizet) + "Mb]", videoname))
+            dowloadFile(
+                savedir + "/" + courseName + " " + qualities[quality] + "/" + folderName + "/" + videoname + ".mp4",videolink)
     print(courseName+" "+qualities[quality]+": ["+str(round(bytesToMb(downloadedsize),2))+"Mb]")
 
 def bytesToMb(a):
@@ -98,21 +112,45 @@ def getVideosLinks():
         for j in range(data[i][1].__len__()):
             videoid = data[i][1][j][1][0]
             videoname = data[i][1][j][0]
+            #print(videoname,videoid)
             videodata = requests.request('GET',
                                          'https://www.lynda.com/ajax/course/' + courseId + '/' + videoid + '/play',
-                                         headers=h, stream=True).json()
-            data[i][1][j][1].append(
-                [videodata[0]['urls']['360'], videodata[0]['urls']['540'], videodata[0]['urls']['720']])
-            temp360 = getFileSize(videodata[0]['urls']['360'])
-            temp540 = getFileSize(videodata[0]['urls']['540'])
-            temp720 = getFileSize(videodata[0]['urls']['720'])
+                                         headers=h).json()
+            try:
+                videodata[0]['urls']['720']
+            except:
+                try:
+                    videodata[0]['urls']['540']
+                except:
+                    data[i][1][j][1].append(
+                        [videodata[0]['urls']['360']])
+                    temp360 = getFileSize(videodata[0]['urls']['360'])
+                    temp540 = temp360
+                    temp720 = temp360
+                    print("%45s   %s.mp4 " % (
+                        "[360p:" + str(bytesToMb(temp360)) + "Mb]", videoname))
+                else:
+                    data[i][1][j][1].append(
+                        [videodata[0]['urls']['360'], videodata[0]['urls']['540']])
+                    temp360 = getFileSize(videodata[0]['urls']['360'])
+                    temp540 = getFileSize(videodata[0]['urls']['540'])
+                    temp720 = temp540
+                    print("%45s   %s.mp4 " % (
+                        "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb]", videoname))
+            else:
+                data[i][1][j][1].append(
+                    [videodata[0]['urls']['360'], videodata[0]['urls']['540'], videodata[0]['urls']['720']])
+                temp360 = getFileSize(videodata[0]['urls']['360'])
+                temp540 = getFileSize(videodata[0]['urls']['540'])
+                temp720 = getFileSize(videodata[0]['urls']['720'])
+                print("%45s   %s.mp4 " % (
+                    "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb, 720p:" + str(
+                        bytesToMb(temp720)) + "Mb]", videoname))
+
             t360 += temp360
             t540 += temp540
             t720 += temp720
             data[i][1][j][1].append([temp360, temp540, temp720])
-            print("%45s   %s.mp4 " % (
-            "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb, 720p:" + str(
-                bytesToMb(temp720)) + "Mb]", videoname))
     print(" ")
     if isExFile:
         print("Exercise File: " + exFileName + "   [" + str(bytesToMb(exfilesize)) + "Mb]")
@@ -143,6 +181,7 @@ def getCoursedetails():
                     videoname = videoname[k:]
                     break
             videoname = str(j) + ". " + videoname
+            #print(videoname, videoid)
             data[i - fromfolder][1].append([validname(videoname), []])
             data[i - fromfolder][1][j - 1][1].append(videoid)
             print("   "+videoname)
