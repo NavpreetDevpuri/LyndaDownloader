@@ -117,32 +117,32 @@ def getVideosLinks():
                                          'https://www.lynda.com/ajax/course/' + courseId + '/' + videoid + '/play',
                                          headers=h).json()
             try:
-                videodata[0]['urls']['720']
+                videodata[1]['urls']['720']
             except:
                 try:
-                    videodata[0]['urls']['540']
+                    videodata[1]['urls']['540']
                 except:
                     data[i][1][j][1].append(
-                        [videodata[0]['urls']['360']])
-                    temp360 = getFileSize(videodata[0]['urls']['360'])
+                        [videodata[1]['urls']['360']])
+                    temp360 = getFileSize(videodata[1]['urls']['360'])
                     temp540 = temp360
                     temp720 = temp360
                     print("%45s   %s.mp4 " % (
                         "[360p:" + str(bytesToMb(temp360)) + "Mb]", videoname))
                 else:
                     data[i][1][j][1].append(
-                        [videodata[0]['urls']['360'], videodata[0]['urls']['540']])
-                    temp360 = getFileSize(videodata[0]['urls']['360'])
-                    temp540 = getFileSize(videodata[0]['urls']['540'])
+                        [videodata[1]['urls']['360'], videodata[1]['urls']['540']])
+                    temp360 = getFileSize(videodata[1]['urls']['360'])
+                    temp540 = getFileSize(videodata[1]['urls']['540'])
                     temp720 = temp540
                     print("%45s   %s.mp4 " % (
                         "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb]", videoname))
             else:
                 data[i][1][j][1].append(
-                    [videodata[0]['urls']['360'], videodata[0]['urls']['540'], videodata[0]['urls']['720']])
-                temp360 = getFileSize(videodata[0]['urls']['360'])
-                temp540 = getFileSize(videodata[0]['urls']['540'])
-                temp720 = getFileSize(videodata[0]['urls']['720'])
+                    [videodata[1]['urls']['360'], videodata[1]['urls']['540'], videodata[1]['urls']['720']])
+                temp360 = getFileSize(videodata[1]['urls']['360'])
+                temp540 = getFileSize(videodata[1]['urls']['540'])
+                temp720 = getFileSize(videodata[1]['urls']['720'])
                 print("%45s   %s.mp4 " % (
                     "[360p:" + str(bytesToMb(temp360)) + "Mb, 540p:" + str(bytesToMb(temp540)) + "Mb, 720p:" + str(
                         bytesToMb(temp720)) + "Mb]", videoname))
