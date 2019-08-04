@@ -4,28 +4,41 @@ import sys
 import requests
 #url='https://www.lynda.com/Python-tutorials/Programming-Fundamentals-Real-World/418249-2.html'
 quality=" "
+url = " "
+savedir = " "
 print("Made by NavpreetDevpuri.")
 print("Enjoy ;)")
 fromfolder=1
-if len(sys.argv)==5:
-    fromfolder=int(sys.argv[4])
-if len(sys.argv)>=4:
-    url = sys.argv[1]
-    savedir = sys.argv[2] + "Lynda"
-    quality=sys.argv[3]
-elif len(sys.argv) >= 3:
-    url = sys.argv[1]
-    savedir = sys.argv[2] + "Lynda"
-elif len(sys.argv)>=2:
-    url=sys.argv[1]
-    temp = sys.argv[0].rfind('/')
-    if temp==-1:
-        temp=0
-        savedir = "Lynda"
-    else:
-        savedir = sys.argv[0][:temp] + "/Lynda"
-else:
+#print(sys.argv)
+arglen = len(sys.argv)
+i=0;
+while(i<arglen-1):
+ i+=1 
+ if sys.argv[i] == "-url": 
+  url = sys.argv[i+1]
+  i+=1
+ elif sys.argv[i] == "-savedir" or sys.argv[i] == "-sd":
+  savedir= sys.argv[i+1]
+  i+=1
+ elif sys.argv[i] == "-quality" or sys.argv[i] == "-q":
+  quality = sys.argv[i+1]
+  if quality == "2" or quality == "1" or quality == "0": continue
+  if quality == "720p":
+   quality = "2"
+  elif quality == "540p":
+   quality = "1"
+  elif quality == "320p":
+   quality = "0"
+  i+=1
+ elif sys.argv[i] == "-fromfolder" or sys.argv[i] == "-ff":
+  fromfolder = int(sys.argv[i+1])
+  i+=1
+ else:
+  print("invalid argumnets. Read about arguments on github: https://github.com/NavpreetDevpuri/LyndaDownloader\n Try angain :)")
+
+if url == " ":
     url = input("Enter Lynda.com course link: ")
+if savedir == " ":
     temp = sys.argv[0].rfind('/')
     if temp == -1:
         temp = 0
