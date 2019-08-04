@@ -1,4 +1,5 @@
 ###### By Navpreet Devpuri
+## Comming soon for windows OS :) 
 ## On Linux
 ### First install 'requests' package by runing following command 
 `pip insatll requests`
