@@ -65,12 +65,12 @@ def download():
     if isExFile:
         print(" [" + str(bytesToMb(getFileSize(exFileLink, h))) + "Mb] Exercise File: " + exFileName)
         dowloadFile(os.path.join(coursedir, exFileName+".zip"),exFileLink,h)
-    for i in range(data.__len__()-1):
+    for i in range(data.__len__()):
         folderName = validname(data[i][0])
         folderdir = os.path.join(coursedir, folderName)
         os.makedirs(folderdir, exist_ok=True)
         print(folderName + ":")
-        for j in range(data[i][1].__len__()-1):
+        for j in range(data[i][1].__len__()):
             try:
                 data[i][1][j][1][1][quality]
             except:
