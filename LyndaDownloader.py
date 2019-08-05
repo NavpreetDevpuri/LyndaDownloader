@@ -39,12 +39,7 @@ while(i<arglen-1):
 if url == " ":
     url = input("Enter Lynda.com course link: ")
 if savedir == " ":
-    temp = sys.argv[0].rfind('/')
-    if temp == -1:
-        temp = 0
-        savedir = "Lynda"
-    else:
-        savedir = sys.argv[0][:temp] + "/Lynda"
+    savedir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Lynda")
 #print(savedir)
 start_time = time.time()
 print("Setting up...")
@@ -64,13 +59,16 @@ downloadedsize=0
 def download():
     print("Downloading...")
     global data,courseId,courseName,exFileId,exFileName,exFileLink,quality,qualities,downloadsize,downloadedsize,isExFile
-    os.makedirs(savedir+"/"+courseName+" "+qualities[quality], exist_ok=True)
+    courseName = validname(courseName)
+    coursedir = os.path.join(savedir, courseName + " " + qualities[quality])
+    os.makedirs(coursedir, exist_ok=True)
     if isExFile:
         print(" [" + str(bytesToMb(getFileSize(exFileLink, h))) + "Mb] Exercise File: " + exFileName)
-        dowloadFile(savedir+"/"+courseName+" "+qualities[quality]+"/"+exFileName+".zip",exFileLink,h)
+        dowloadFile(os.path.join(coursedir, exFileName+".zip"),exFileLink,h)
     for i in range(data.__len__()-1):
-        folderName = data[i][0]
-        os.makedirs(savedir+"/"+courseName+" "+qualities[quality]+"/"+folderName, exist_ok=True)
+        folderName = validname(data[i][0])
+        folderdir = os.path.join(coursedir, folderName)
+        os.makedirs(folderdir, exist_ok=True)
         print(folderName + ":")
         for j in range(data[i][1].__len__()-1):
             try:
@@ -85,8 +83,7 @@ def download():
                 videoname = data[i][1][j][0]
                 sizet = bytesToMb(data[i][1][j][1][2][quality])
                 print("%17s   %s.mp4 " % ("[" + qualities[quality] + ": " + str(sizet) + "Mb]", videoname))
-            dowloadFile(
-                savedir + "/" + courseName + " " + qualities[quality] + "/" + folderName + "/" + videoname + ".mp4",videolink)
+            dowloadFile(os.path.join(folderdir, videoname + ".mp4"),videolink)
     print(courseName+" "+qualities[quality]+": ["+str(round(bytesToMb(downloadedsize),2))+"Mb]")
 
 def bytesToMb(a):
