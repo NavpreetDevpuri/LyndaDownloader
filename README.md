@@ -32,7 +32,7 @@ python 'C:\Users\navpreetdevpuri\Downloads\LyndaDownloader.py' -url 'https://www
    -  `apt-get update`
    -  `apt-get install python`
    -  `pip install requests`
-3. Know you can run python script on android
+3. Know you can run python script on android<br>
 -savedir or -sd argument is compulsory for android. 
 ##### For example : 
 ```python 
