@@ -118,7 +118,7 @@ def getVideosLinks():
     for i in range(data.__len__()):
         folderName = data[i][0]
         print(folderName + ":")
-        data.append([validname(folderName), []])
+        #data.append([validname(folderName), []])
         for j in range(data[i][1].__len__()):
             videoid = data[i][1][j][1][0]
             videoname = data[i][1][j][0]
