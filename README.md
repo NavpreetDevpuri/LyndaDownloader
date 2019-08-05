@@ -1,6 +1,6 @@
 ###### By Navpreet Devpuri
 ### Optional arguments with python script
-***If you run script without this argumentst then It will ask this things on run time***<br/>
+***If you run script without this arguments then It will ask this things on run time***<br/>
 
 2. ***-url*** : **Url link** of Lynda course.
 3. ***-savedir or -sd*** : Directory **location (Full path)** on your system where you want to save files (by default set to the same location as LyndaDownloader.py).
