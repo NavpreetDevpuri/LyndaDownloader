@@ -23,22 +23,6 @@ python 'C:\Users\navpreetdevpuri\Downloads\LyndaDownloader.py' -url 'https://www
 ```
 
 
-## On Linux
-1. Run following commads to install Python: 
-   -  `sudo apt-get update`
-   -  `sudo apt-get -y install python3`
-   -  `sudo apt-get -y install python3-pip`
-   -  `sudo pip3 install requests`
-2. Know you can run python script on Linux
-
-##### For example : 
-```python 
-python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py'
-or
-python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py' -url 'https://www.lynda.com/C-tutorials/C-Essential-Training/772322-2.html' -sd '/home/navpreetdevpuri/Downloads/' -quality 720p 
-```
-
-
 ## On Android
 ##### You can also run this script in android (How to run python script on android ?)
 1. Download and install **Termux** app. (remember to give *storage permission* from phone's settings and *turn off battery optimization* for Termux app to make app run long)
@@ -56,4 +40,17 @@ python '/storage/emulated/0/Download/LyndaDownloader.py' -url 'https://www.lynda
 ```
 
 
+## On Linux
+1. Run following commads to install Python: 
+   -  `sudo apt-get update`
+   -  `sudo apt-get -y install python3`
+   -  `sudo apt-get -y install python3-pip`
+   -  `sudo pip3 install requests`
+2. Know you can run python script on Linux
 
+##### For example : 
+```python 
+python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py'
+or
+python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py' -url 'https://www.lynda.com/C-tutorials/C-Essential-Training/772322-2.html' -sd '/home/navpreetdevpuri/Downloads/' -quality 720p 
+```
