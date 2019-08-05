@@ -1,4 +1,6 @@
 ###### By Navpreet Devpuri
+## Exicutable for windows comming soon. :) 
+## Exicutable(.exe) with graphical userinterface are easy to use 
 ### Optional arguments with python script
 ***If you run script without this arguments then It will ask this things on run time***<br/>
 
