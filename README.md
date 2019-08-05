@@ -33,10 +33,10 @@ python 'C:\Users\navpreetdevpuri\Downloads\LyndaDownloader.py' -url 'https://www
    -  `apt-get install python`
    -  `pip install requests`
 3. Know you can run python script on android
-
+-savedir or -sd argument is compulsory for android. 
 ##### For example : 
 ```python 
-python '/storage/emulated/0/Download/LyndaDownloader.py'
+python '/storage/emulated/0/Download/LyndaDownloader.py' -savedir '/storage/emulated/0/Download/'
 or
 python '/storage/emulated/0/Download/LyndaDownloader.py' -url 'https://www.lynda.com/C-tutorials/C-Essential-Training/772322-2.html' -savedir '/storage/emulated/0/Download/' -q 2 
 ```
