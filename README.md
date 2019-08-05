@@ -1,5 +1,5 @@
 ###### By Navpreet Devpuri
-## Comming soon for windows OS :) on August 5 2019
+## Comming soon for windows OS :) on August 5 2019 (Today night) 
 ## On Linux
 ### First install 'requests' package by runing following command 
 `pip insatll requests`
