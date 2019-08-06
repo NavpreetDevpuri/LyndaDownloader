@@ -6,6 +6,7 @@ Download and run ***LyndaDownloader.exe*** :)
 Download and run ***LyndaDownloader*** :)
 
 # Otherwise you can directly run Python script LyndaDownloader.py :) 
+# You can also run this script on android
 ### Optional arguments with python script
 ***If you run script without this arguments then It will ask this things on run time***<br/>
 
