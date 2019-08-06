@@ -1,6 +1,11 @@
 ###### By Navpreet Devpuri
-## Exicutable for windows comming soon. :) 
-## Exicutable(.exe) with graphical userinterface are easy to use 
+# Exicutables 
+## For windows 
+Download and run LyndaDownloader.exe :)
+## For Linux 
+Download and run LyndaDownloader :)
+
+# Otherwise you can directly run Python script LyndaDownloader.py :) 
 ### Optional arguments with python script
 ***If you run script without this arguments then It will ask this things on run time***<br/>
 
