@@ -1,9 +1,9 @@
 ###### By Navpreet Devpuri
 # Exicutables 
 ## For windows 
-Download and run LyndaDownloader.exe :)
+Download and run ***LyndaDownloader.exe*** :)
 ## For Linux 
-Download and run LyndaDownloader :)
+Download and run ***LyndaDownloader*** :)
 
 # Otherwise you can directly run Python script LyndaDownloader.py :) 
 ### Optional arguments with python script
