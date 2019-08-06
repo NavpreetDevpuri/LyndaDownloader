@@ -2,6 +2,8 @@ import time
 import os
 import sys
 import requests
+import readline
+readline.parse_and_bind("control-v: paste")
 #url='https://www.lynda.com/Python-tutorials/Programming-Fundamentals-Real-World/418249-2.html'
 quality=" "
 url = " "
@@ -37,6 +39,7 @@ while(i<arglen-1):
   print("invalid argumnets. Read about arguments on github: https://github.com/NavpreetDevpuri/LyndaDownloader\n Try angain :)")
 
 if url == " ":
+    print("Eg. https://www.lynda.com/Python-tutorials/Programming-Fundamentals-Real-World/418249-2.html")
     url = input("Enter Lynda.com course link: ")
 if savedir == " ":
     savedir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Lynda")
@@ -248,3 +251,4 @@ if isExFile:
 #print(data)
 download()
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
+input("Press any key to exit :)")
