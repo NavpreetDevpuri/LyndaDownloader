@@ -14,7 +14,7 @@ Download and run ***LyndaDownloader*** :)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/05.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/06.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/07.jpg)
-# step 3 open chrome's devloper option by pressing ctrl + shift + I then open networking tab and find 'play' and copy cookies.
+# step 3 open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
 
 # Run Python script LyndaDownloader.py :) and download 'Exercise Files' menualy
