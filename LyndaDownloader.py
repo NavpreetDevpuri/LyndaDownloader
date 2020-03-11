@@ -75,7 +75,7 @@ def download():
     os.makedirs(coursedir, exist_ok=True)
     if isExFile:
         print(" [" + str(bytesToMb(getFileSize(exFileLink, h))) + "Mb] Exercise File: " + exFileName)
-        dowloadFile(os.path.join(coursedir, exFileName + ".zip"), exFileLink, h)
+        #dowloadFile(os.path.join(coursedir, exFileName + ".zip"), exFileLink, h)
     for i in range(data.__len__()):
         folderName = validname(data[i][0])
         folderdir = os.path.join(coursedir, folderName)
