@@ -1,11 +1,23 @@
 ###### By Navpreet Devpuri
-# Exicutables (Not working for know. Trying to fix it. Use python script)
+# Exicutables (Not working for now. Trying to fix it. Use python script)
 ## For windows 
 Download and run ***LyndaDownloader.exe*** :)
 ## For Linux 
 Download and run ***LyndaDownloader*** :)
 
-# Otherwise you can directly run Python script LyndaDownloader.py :)
+# step 1 register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get you card number.
+![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
+![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/02.jpg)
+# step 2 login by using card number from [here](https://www.lynda.com/signin)
+![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/03.jpg)
+![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/04.jpg)
+![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/05.jpg)
+![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/06.jpg)
+![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/07.jpg)
+# step 3 open chrome's devloper option by pressing ctrl + shift + I then open networking tab and find 'play' and copy cookies.
+![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
+
+# Run Python script LyndaDownloader.py :)
 ### Optional arguments with python script
 ***If you run script without this arguments then It will ask this things on run time***<br/>
 
