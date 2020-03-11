@@ -17,7 +17,7 @@ Download and run ***LyndaDownloader*** :)
 # step 3 open chrome's devloper option by pressing ctrl + shift + I then open networking tab and find 'play' and copy cookies.
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
 
-# Run Python script LyndaDownloader.py :)
+# Run Python script LyndaDownloader.py :) and download 'Exercise Files' menualy
 ### Optional arguments with python script
 ***If you run script without this arguments then It will ask this things on run time***<br/>
 
