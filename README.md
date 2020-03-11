@@ -1,5 +1,5 @@
 ###### By Navpreet Devpuri
-# Exicutables 
+# Exicutables (Not working for know. Trying to fix it. Use python script)
 ## For windows 
 Download and run ***LyndaDownloader.exe*** :)
 ## For Linux 
