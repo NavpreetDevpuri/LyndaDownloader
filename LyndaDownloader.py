@@ -265,8 +265,8 @@ elif quality == 1:
     downloadsize = t540
 else:
     downloadsize = t720
-if isExFile:
-    downloadsize += exfilesize
+#if isExFile:
+    #downloadsize += exfilesize
 # print(data)
 download()
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
