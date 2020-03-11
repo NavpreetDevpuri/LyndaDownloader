@@ -8,7 +8,7 @@ Download and run ***LyndaDownloader*** :)
 # step 1 register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get you card number.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/02.jpg)
-# step 2 login by using card number from [here](https://www.lynda.com/signin)
+# step 2 login by using card number with organization's URL detroitpubliclibrary.org [here](https://www.lynda.com/signin)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/03.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/04.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/05.jpg)
