@@ -89,6 +89,8 @@ def download(nn=0):
     if tcourseName != validname(courseName):
         nn=0
         downloadedsize=0
+        filer = open("temp.txt", "w")
+        filer.close()
     filew=open("temp.txt","a+")
     print("Downloading...")
     ct=nn
