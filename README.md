@@ -30,7 +30,7 @@ Download and run ***LyndaDownloader*** :)
 ## On windows
 1. Download and install ***Python3.x.x*** from [link](https://www.python.org/downloads/windows/)
 2. Make sure to check ***Add Python3 to PATH*** on first step of installation.
-3. Open CMD and run command `pip3 install requests`
+3. Open CMD and run command `pip3 install requests` or `pip install requests`
 
 4. Know you can run python script on Windows
 
@@ -64,7 +64,7 @@ python '/storage/emulated/0/Download/LyndaDownloader.py' -url 'https://www.lynda
    -  `sudo apt-get update`
    -  `sudo apt-get -y install python3`
    -  `sudo apt-get -y install python3-pip`
-   -  `sudo pip3 install requests`
+   -  `sudo pip3 install requests` or `pip install requests`
 2. Know you can run python script on Linux
 
 ##### For example : 
