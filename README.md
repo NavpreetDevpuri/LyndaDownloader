@@ -1,5 +1,5 @@
 ###### By Navpreet Devpuri
-
+# After download any course delete data.txt, datas.txt, temp.txt, ttemp.txt, tempc.txt from main directory.
 # step 1 register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number. if you have an account then continue from step 2.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/02.jpg)
