@@ -1,9 +1,4 @@
 ###### By Navpreet Devpuri
-# Exicutables (Not working for now. Trying to fix it. Use python script)
-## For windows 
-Download and run ***LyndaDownloader.exe*** :)
-## For Linux 
-Download and run ***LyndaDownloader*** :)
 
 # step 1 register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
@@ -17,15 +12,8 @@ Download and run ***LyndaDownloader*** :)
 # step 3 open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
 
-# Run Python script LyndaDownloader.py :) and download 'Exercise Files' menualy
-### Optional arguments with python script
-***If you run script without this arguments then It will ask this things on run time***<br/>
-
-2. ***-url*** : **Url link** of Lynda course.
-3. ***-savedir or -sd*** : Directory **location (Full path)** on your system where you want to save files (by default set to the same location as LyndaDownloader.py).
-4. ***-quality or -q*** : **Video quality** (360p or 0, 540p or 1, 720p or 2).
-5. ***-fromfolder or -ff*** : In case you want to download only few topics by entring **starting topic number** (by default set to 1 which means start download from 1st topic of course).
-
+# Run Python script LyndaDownloader.py :) and download 'Exercise Files' menualy.
+# if some error occurred or stoped while downloading then just restart python script it will repause download.
 
 ## On windows
 1. Download and install ***Python3.x.x*** from [link](https://www.python.org/downloads/windows/)
@@ -73,3 +61,10 @@ python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py'
 or
 python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py' -url 'https://www.lynda.com/C-tutorials/C-Essential-Training/772322-2.html' -sd '/home/navpreetdevpuri/Downloads/' -quality 720p 
 ```
+
+### Optional arguments with python script
+***If you run script without this arguments then It will ask this things on run time***<br/>
+2. ***-url*** : **Url link** of Lynda course.
+3. ***-savedir or -sd*** : Directory **location (Full path)** on your system where you want to save files (by default set to the same location as LyndaDownloader.py).
+4. ***-quality or -q*** : **Video quality** (360p or 0, 540p or 1, 720p or 2).
+5. ***-fromfolder or -ff*** : In case you want to download only few topics by entring **starting topic number** (by default set to 1 which means start download from 1st topic of course).
