@@ -334,6 +334,11 @@ elif quality == 1:
 else:
     downloadsize = t720
 download()
+file = open("data.txt", "w")
+file.close()
+filew = open("temp.txt", "w")
+filew.close()
+
 
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
 input("Press any key to exit :)")
