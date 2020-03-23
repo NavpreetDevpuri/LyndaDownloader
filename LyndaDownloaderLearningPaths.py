@@ -389,7 +389,6 @@ for ii in range(templ,res.__len__()):
     else:
         downloadsize = t720
     download()
-    filew.write(lpname + "," + str(ii + 1) + "\n")
     file = open("data.txt", "w")
     file.close()
     filew = open("temp.txt", "w")
