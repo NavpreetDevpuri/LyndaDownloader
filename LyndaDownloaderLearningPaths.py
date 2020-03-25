@@ -290,9 +290,9 @@ if tlpname != lpname:
     filer = open("tempt.txt", "w")
     filer.close()
 
-filew = open("tempt.txt", "a+")
+filewtt = open("tempt.txt", "a+")
 for ii in range(templ,res.__len__()):
-
+    filewtt.write(lpname+","+str(ii)+"\n")
     #print(str(ii)+"yessssssssssssssss")
     r = requests.request('GET', URL, headers=h, stream=True)
     html = str(r.content)
@@ -395,6 +395,7 @@ for ii in range(templ,res.__len__()):
     filew.close()
 filew = open("tempt.txt", "w")
 filew.close()
+filewtt.close()
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
 input("Press any key to exit :)")
 
