@@ -132,6 +132,8 @@ def download(nn=0):
             ct=ct+1
             #print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
+            filew.close()
+            filew = open("temp.txt", "a+")
     print(courseName + " " + qualities[quality] + ": [" + str(round(bytesToMb(downloadedsize), 2)) + "Mb]")
     filew.close()
 
@@ -293,6 +295,8 @@ if tlpname != lpname:
 filewtt = open("tempt.txt", "a+")
 for ii in range(templ,res.__len__()):
     filewtt.write(lpname+","+str(ii)+"\n")
+    filewtt.close();
+    filewtt = open("tempt.txt", "a+")
     #print(str(ii)+"yessssssssssssssss")
     r = requests.request('GET', URL, headers=h, stream=True)
     html = str(r.content)
@@ -389,6 +393,7 @@ for ii in range(templ,res.__len__()):
     else:
         downloadsize = t720
     download()
+    quality = ""+str(quality)
     file = open("data.txt", "w")
     file.close()
     filew = open("temp.txt", "w")
