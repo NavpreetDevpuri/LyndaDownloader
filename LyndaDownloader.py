@@ -70,9 +70,12 @@ downloadedsize = 0
 
 def download(nn=0):
     global data, courseName, quality, qualities, downloadsize, downloadedsize
-    filer = open("temp.txt", "r")
-    cont=filer.read()
-    filer.close()
+    try:
+        filer = open("temp.txt", "r")
+        cont = filer.read()
+        filer.close()
+    except:
+        cont=''
     temp=cont.split("\n")
     cont=''
     for i in range(temp.__len__()-1,-1,-1):
@@ -124,6 +127,8 @@ def download(nn=0):
             ct=ct+1
             #print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
+            filew.close()
+            filew = open("temp.txt", "a+")
     print(courseName + " " + qualities[quality] + ": [" + str(round(bytesToMb(downloadedsize), 2)) + "Mb]")
     filew.close()
 
@@ -254,7 +259,7 @@ print("Collecting information...")
 temp = html.index('timeRequired')
 courseDuration = html[temp:temp + 55].split('>')[1].split('<')[0]
 temp = html.index('data-course="')
-courseName = html[temp + 13:temp + 13 + html[temp + 13:temp + 144].index('"')] + " (" + courseDuration + ")"
+courseName = validname(html[temp + 13:temp + 13 + html[temp + 13:temp + 144].index('"')] + " (" + courseDuration + ")")
 courseId = html[html.index("/"):html.index('ios')].split('>')[1][88:-3]
 print("###" + courseName + "#####")
 print("Getting course details...")
@@ -293,6 +298,7 @@ try:
 except:
     cont=""
 tcourseName=""
+#print(cont)
 if cont != "":
     tcourseName = cont.split(",")[0]
 if tcourseName != courseName:
@@ -338,7 +344,6 @@ file = open("data.txt", "w")
 file.close()
 filew = open("temp.txt", "w")
 filew.close()
-
 
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
 input("Press any key to exit :)")
