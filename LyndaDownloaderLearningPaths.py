@@ -267,7 +267,7 @@ print("Collecting information...")
 res = [i.start() for i in re.finditer('item-details', htmlstr)]
 temp0 = htmlstr.index('h1')
 temp1 = htmlstr[temp0+3:temp0+144].index("</h1>")
-lpname = html.unescape(validname(htmlstr[temp0+3:temp0+3+temp1].split("\\")[0]))
+lpname = html.unescape(validname(htmlstr[temp0+3:temp0+3+temp1].split("\\")[0].strip()))
 savedir=os.path.join(savedir,lpname)
 
 try:
@@ -312,7 +312,7 @@ for ii in range(templ,res.__len__()):
     courseDuration = htmlstr[temp:temp + 55].split('>')[1].split('<')[0]
     temp = htmlstr.index('data-course="')
     courseName = str(ii) + ". " + htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index(
-        '"')].split("\\")[0] + " (" + courseDuration + ")"
+        '"')].split("\\")[0].strip() + " (" + courseDuration + ")"
     courseName=html.unescape(validname(courseName))
     courseId = htmlstr[htmlstr.index("/"):htmlstr.index('ios')].split('>')[1][88:-3]
     print("###" + courseName + "#####")
