@@ -259,7 +259,7 @@ print("Collecting information...")
 temp = htmlstr.index('timeRequired')
 courseDuration = htmlstr[temp:temp + 55].split('>')[1].split('<')[0]
 temp = htmlstr.index('data-course="')
-courseName = validname(html.unescape(htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index('"')].split("\\")[0] + " (" + courseDuration + ")"))
+courseName = validname(html.unescape(htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index('"')].split("\\")[0].strip() + " (" + courseDuration + ")"))
 courseId = htmlstr[htmlstr.index("/"):htmlstr.index('ios')].split('>')[1][88:-3]
 print("###" + courseName + "#####")
 print("Getting course details...")
