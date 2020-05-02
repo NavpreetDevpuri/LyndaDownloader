@@ -57,11 +57,10 @@ h = {
     'Connection': 'keep-alive',
     'Cookie': cookies}
 
-
 def validname(name):
     return name.replace('|', '').replace('>', '').replace('<', '').replace('"', '').replace('?', '').replace('*',
                                                                                                              '').replace(
-        ':', '').replace('/', '').replace('\\', '')
+        ':', '').replace('/', '').replace('\\', '').replace("\r","").replace("\n","").replace("\t","")
 
 
 qualities = ["360p", "540p", "720p"]
@@ -166,7 +165,7 @@ def dowloadFile(name, link, header=None):
 
 def getVideosLinks():
     print("Getting videos details...")
-    global fromfolder, data, html, t360, t540, t720
+    global fromfolder, data, htmlstr, t360, t540, t720
     for i in range(data.__len__()):
         folderName = data[i][0]
         print(folderName + ":")
@@ -227,24 +226,24 @@ def getVideosLinks():
 def getCoursedetails():
     global totalVideos, data
     for i in range(fromfolder, list.__len__()):
-        folderName = list[i][list[i].index('<h4'):list[i].index('</h4')].split('>')[1]
+        folderName = html.unescape(list[i][list[i].index('<h4'):list[i].index('</h4')].split('>')[1])
         print(folderName + ":")
-        data.append([validname(folderName), []])
+        data.append([(validname(folderName)), []])
         videosList = list[i].split('row toc-items')[1].split('<li')
         totalVideos += videosList.__len__() - 1
         for j in range(1, videosList.__len__()):
             temp = videosList[j].index('video-duration')
             videoduration = videosList[j][temp + 16:temp + 30].split('<')[0]
             videoid = videosList[j][videosList[j].index('"') + 1:videosList[j].index('c') - 2]
-            videoname = videosList[j][videosList[j].index('<a'):videosList[j].index('</a')].split('\\n')[
-                            1] + " (" + videoduration + ")"
+            videoname = (videosList[j][videosList[j].index('<a'):videosList[j].index('</a')].split('\\n')[
+                            1]).split("\\")[0].strip() + " (" + videoduration + ")"
             for k in range(0, videoname.__len__()):
                 if videoname[k] == " ":
                     continue
                 else:
                     videoname = videoname[k:]
                     break
-            videoname = str(j) + ". " + videoname
+            videoname = str(j) + ". " + html.unescape(videoname)
             # print(videoname, videoid)
             data[i - fromfolder][1].append([validname(videoname), []])
             data[i - fromfolder][1][j - 1][1].append(videoid)
@@ -254,35 +253,35 @@ def getCoursedetails():
 
 print("Connecting to Lynda.com...")
 r = requests.request('GET', url, headers=h, stream=True)
-html = str(r.content)
+htmlstr = str(r.content)
 print("Collecting information...")
-temp = html.index('timeRequired')
-courseDuration = html[temp:temp + 55].split('>')[1].split('<')[0]
-temp = html.index('data-course="')
-courseName = validname(html[temp + 13:temp + 13 + html[temp + 13:temp + 144].index('"')] + " (" + courseDuration + ")")
-courseId = html[html.index("/"):html.index('ios')].split('>')[1][88:-3]
+temp = htmlstr.index('timeRequired')
+courseDuration = htmlstr[temp:temp + 55].split('>')[1].split('<')[0]
+temp = htmlstr.index('data-course="')
+courseName = validname(html.unescape(htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index('"')] + " (" + courseDuration + ")"))
+courseId = htmlstr[htmlstr.index("/"):htmlstr.index('ios')].split('>')[1][88:-3]
 print("###" + courseName + "#####")
 print("Getting course details...")
 isExFile = True
 try:
-    start = html.index("exercise/")
+    start = htmlstr.index("exercise/")
 except:
     isExFile = False
 if isExFile:
     i = start
     while (True):
         i += 1
-        if html[i] != '"':
+        if htmlstr[i] != '"':
             continue
         else:
             break
     exFileName = "exFile " + validname(courseName.replace(" ", "_"))
-    exFileId = html[start + 9:i]
+    exFileId = htmlstr[start + 9:i]
     exFileLink = 'https://www.lynda.com/ajax/course/' + courseId + '/download/exercise/' + exFileId
     exfilesize = getFileSize(exFileLink, h)
     print("Exercise File: " + exFileName + "   [" + str(bytesToMb(exfilesize)) + "Mb]")
-list = html[
-       html.index('course-toc toc-container autoscroll'):html.index('class="show-all"><span class="more ga"')].split(
+list = htmlstr[
+       htmlstr.index('course-toc toc-container autoscroll'):htmlstr.index('class="show-all"><span class="more ga"')].split(
     '<li role="presentation"')
 data = []
 t360 = 0
