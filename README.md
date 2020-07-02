@@ -1,4 +1,7 @@
 ###### By Navpreet Devpuri
+
+**Note**: When using `LyndaDownloaderLearningPaths.py` then make sure you opened that learning path and clicked on button `Start learning`.
+
 # Step 1) register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number. if you have an account then continue from step 3.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/02.jpg)
