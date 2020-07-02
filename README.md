@@ -66,7 +66,7 @@ python3 '/home/navpreetdevpuri/Downloads/LyndaDownloader.py' -url 'https://www.l
 
 ### Optional arguments with python script
 ***If you run script without this arguments then It will ask this things on run time***<br/>
-2. ***-url*** : **Url link** of Lynda course.
-3. ***-savedir or -sd*** : Directory **location (Full path)** on your system where you want to save files (by default set to the same location as LyndaDownloader.py).
-4. ***-quality or -q*** : **Video quality** (360p or 0, 540p or 1, 720p or 2).
-5. ***-fromfolder or -ff*** : In case you want to download only few topics by entring **starting topic number** (by default set to 1 which means start download from 1st topic of course).
+1. ***-url*** : **Url link** of Lynda course.
+2. ***-savedir or -sd*** : Directory **location (Full path)** on your system where you want to save files (by default set to the same location as LyndaDownloader.py).
+3. ***-quality or -q*** : **Video quality** (360p or 0, 540p or 1, 720p or 2).
+4. ***-fromfolder or -ff*** : In case you want to download only few topics by entring **starting topic number** (by default set to 1 which means start download from 1st topic of course).
