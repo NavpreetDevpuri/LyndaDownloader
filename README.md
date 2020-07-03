@@ -1,21 +1,21 @@
 ###### By Navpreet Devpuri
 
-**Note**: When using `LyndaDownloaderLearningPaths.py` then make sure you opened that learning path and clicked on button `Start learning`.
+**Notes**: 
+ 1. When using `LyndaDownloaderLearningPaths.py` then make sure you opened that learning path and clicked on button `Start learning`.
+ 2. Run Python script LyndaDownloader.py :) and download 'Exercise Files' manually.
+ 3. if some error occurred or stoped while downloading then just restart python script it will repause download.
 
-# Step 1) register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number. if you have an account then continue from step 3.
+### Step 1) register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number. if you have an account then continue from step 3.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/02.jpg)
-# Step 2) login by using card number with organization's URL detroitpubliclibrary.org [here](https://www.lynda.com/signin)
+### Step 2) login by using card number with organization's URL detroitpubliclibrary.org [here](https://www.lynda.com/signin)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/03.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/04.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/05.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/06.jpg)
 ![step 2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/07.jpg)
-# Step 3) open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
+### Step 3) open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
-
-# Run Python script LyndaDownloader.py :) and download 'Exercise Files' manually.
-# if some error occurred or stoped while downloading then just restart python script it will repause download.
 
 ## On windows
 1. Download and install ***Python3.x.x*** from [link](https://www.python.org/downloads/windows/)
