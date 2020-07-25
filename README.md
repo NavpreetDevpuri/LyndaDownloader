@@ -3,7 +3,8 @@
 **Notes**: 
  1. When using `LyndaDownloaderLearningPaths.py` then make sure you opened that learning path and clicked on button `Start learning`.
  2. Run Python script LyndaDownloader.py :) and download 'Exercise Files' manually.
- 3. if some error occurred or stoped while downloading then just restart python script it will repause download.
+ 3. If some error occurred or stoped while downloading then just restart python script it will repause download.
+ 4. If you started downlaoding some course then finish it as soon as possible because after some time links will be expire.
 
 ### Step 1) register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number. if you have an account then continue from step 3.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
