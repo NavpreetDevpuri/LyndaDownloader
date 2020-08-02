@@ -5,7 +5,6 @@ import re
 import requests
 import html
 #import readline
-
 quality = " "
 url = " "
 savedir = " "
@@ -135,8 +134,7 @@ def download(nn=0):
                 continue
             # print(videolink)
             dowloadFile(os.path.join(folderdir, videoname + ".mp4"), videolink)
-            dowloadFile(os.path.join(folderdir, videoname + ".srt"),
-                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h)
+
             ct = ct+1
             #print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
