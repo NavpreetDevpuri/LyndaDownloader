@@ -20,7 +20,7 @@ print("Enjoy ;)")
 fromfolder = 1
 # print(sys.argv)
 arglen = len(sys.argv)
-i = 0;
+i = 0
 while (i < arglen - 1):
     i += 1
     if sys.argv[i] == "-url":
@@ -31,7 +31,8 @@ while (i < arglen - 1):
         i += 1
     elif sys.argv[i] == "-quality" or sys.argv[i] == "-q":
         quality = sys.argv[i + 1]
-        if quality == "2" or quality == "1" or quality == "0": continue
+        if quality == "2" or quality == "1" or quality == "0":
+            continue
         if quality == "720p":
             quality = "2"
         elif quality == "540p":
@@ -50,7 +51,8 @@ if url == " ":
     print("Eg. https://www.lynda.com/learning-paths/Video/become-a-film-producer")
     url = input("Enter Lynda.com learning-path link: ")
 if savedir == " ":
-    savedir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Lynda")
+    savedir = os.path.join(os.path.dirname(
+        os.path.realpath(__file__)), "Lynda")
 # print(savedir)
 start_time = time.time()
 print("Setting up...")
@@ -81,31 +83,31 @@ def download(nn=0):
         filer.close()
     except:
         cont = ''
-    temp=cont.split("\n")
-    cont=''
-    for i in range(temp.__len__()-1,-1,-1):
-        if temp[i]!='':
-            cont=temp[i]
+    temp = cont.split("\n")
+    cont = ''
+    for i in range(temp.__len__()-1, -1, -1):
+        if temp[i] != '':
+            cont = temp[i]
             break
-    #print(cont)
-    tcourseName=""
+    # print(cont)
+    tcourseName = ""
     if cont != "":
         temp = cont.split(",")
         tcourseName = temp[0]
         downloadedsize = int(temp[1])
         nn = int(temp[2])
     if tcourseName != validname(courseName):
-        nn=0
-        downloadedsize=0
+        nn = 0
+        downloadedsize = 0
         filer = open("temp.txt", "w")
         filer.close()
-    filew=open("temp.txt","a+")
+    filew = open("temp.txt", "a+")
     print("Downloading...")
-    ct=nn
+    ct = nn
     courseName = validname(courseName)
     coursedir = os.path.join(savedir, courseName + " " + qualities[quality])
     os.makedirs(coursedir, exist_ok=True)
-    mm=0
+    mm = 0
     for i in range(data.__len__()):
         folderName = validname(data[i][0])
         folderdir = os.path.join(coursedir, folderName)
@@ -119,23 +121,28 @@ def download(nn=0):
                 videolink = data[i][1][j][1][1][quality - 1]
                 videoname = data[i][1][j][0]
                 sizet = bytesToMb(data[i][1][j][1][2][quality - 1])
-                print("%17s   %s.mp4 " % ("[" + qualities[quality - 1] + ": " + str(sizet) + "Mb]", videoname))
+                print("%17s   %s.mp4 " % (
+                    "[" + qualities[quality - 1] + ": " + str(sizet) + "Mb]", videoname))
             else:
                 videolink = data[i][1][j][1][1][quality]
                 videoname = data[i][1][j][0]
                 sizet = bytesToMb(data[i][1][j][1][2][quality])
-                print("%17s   %s.mp4 " % ("[" + qualities[quality] + ": " + str(sizet) + "Mb]", videoname))
+                print("%17s   %s.mp4 " % (
+                    "[" + qualities[quality] + ": " + str(sizet) + "Mb]", videoname))
             if mm < nn:
                 mm = mm+1
                 continue
-            #print(videolink)
+            # print(videolink)
             dowloadFile(os.path.join(folderdir, videoname + ".mp4"), videolink)
-            ct=ct+1
+            dowloadFile(os.path.join(folderdir, videoname + ".srt"),
+                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h)
+            ct = ct+1
             #print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
             filew.close()
             filew = open("temp.txt", "a+")
-    print(courseName + " " + qualities[quality] + ": [" + str(round(bytesToMb(downloadedsize), 2)) + "Mb]")
+    print(courseName + " " + qualities[quality] + ": [" +
+          str(round(bytesToMb(downloadedsize), 2)) + "Mb]")
     filew.close()
 
 
@@ -163,8 +170,9 @@ def dowloadFile(name, link, header=None):
         downloadedsize += s
         alloverp = round(downloadedsize / downloadsize * 100, 3)
         print('\r %.2f%% (%.2fMb/%.2fMb)  Allover:%.2f%% (%.2fMb/%.2fMb)' % (
-        status, bytesToMb(sizet), bytesToMb(size), alloverp, round(bytesToMb(downloadedsize), 2),
-        round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
+            status, bytesToMb(sizet), bytesToMb(
+                size), alloverp, round(bytesToMb(downloadedsize), 2),
+            round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
 
     print(" ")
     f.close()
@@ -222,7 +230,8 @@ def getVideosLinks():
             data[i][1][j][1].append([temp360, temp540, temp720])
     print(" ")
     if isExFile:
-        print("Exercise File: " + exFileName + "   [" + str(bytesToMb(exfilesize)) + "Mb]")
+        print("Exercise File: " + exFileName +
+              "   [" + str(bytesToMb(exfilesize)) + "Mb]")
     print(courseName)
     print(" Total Videos : " + str(totalVideos))
     print("    [360p:" + str(bytesToMb(t360)) + "Mb, 540p:" + str(
@@ -234,7 +243,8 @@ def getVideosLinks():
 def getCoursedetails():
     global totalVideos, data
     for i in range(fromfolder, list.__len__()):
-        folderName = html.unescape(list[i][list[i].index('<h4'):list[i].index('</h4')].split('>')[1])
+        folderName = html.unescape(list[i][list[i].index(
+            '<h4'):list[i].index('</h4')].split('>')[1])
         print(folderName + ":")
         data.append([validname(folderName), []])
         videosList = list[i].split('row toc-items')[1].split('<li')
@@ -242,9 +252,10 @@ def getCoursedetails():
         for j in range(1, videosList.__len__()):
             temp = videosList[j].index('video-duration')
             videoduration = videosList[j][temp + 16:temp + 30].split('<')[0]
-            videoid = videosList[j][videosList[j].index('"') + 1:videosList[j].index('c') - 2]
+            videoid = videosList[j][videosList[j].index(
+                '"') + 1:videosList[j].index('c') - 2]
             videoname = (videosList[j][videosList[j].index('<a'):videosList[j].index('</a')].split('\\n')[
-                            1]).split("\\")[0].strip() + " (" + videoduration + ")"
+                1]).split("\\")[0].strip() + " (" + videoduration + ")"
             for k in range(0, videoname.__len__()):
                 if videoname[k] == " ":
                     continue
@@ -260,15 +271,16 @@ def getCoursedetails():
 
 
 print("Connecting to Lynda.com...")
-URL=url
+URL = url
 r = requests.request('GET', URL, headers=h, stream=True)
 htmlstr = str(r.content)
 print("Collecting information...")
 res = [i.start() for i in re.finditer('item-details', htmlstr)]
 temp0 = htmlstr.index('h1')
 temp1 = htmlstr[temp0+3:temp0+144].index("</h1>")
-lpname = html.unescape(validname(htmlstr[temp0+3:temp0+3+temp1].split("\\")[0].strip()))
-savedir=os.path.join(savedir,lpname)
+lpname = html.unescape(
+    validname(htmlstr[temp0+3:temp0+3+temp1].split("\\")[0].strip()))
+savedir = os.path.join(savedir, lpname)
 
 try:
     filer = open("tempt.txt", "r")
@@ -294,16 +306,17 @@ if tlpname != lpname:
     filer.close()
 
 filewtt = open("tempt.txt", "a+")
-for ii in range(templ,res.__len__()):
+for ii in range(templ, res.__len__()):
     filewtt.write(lpname+","+str(ii)+"\n")
-    filewtt.close();
+    filewtt.close()
     filewtt = open("tempt.txt", "a+")
-    #print(str(ii)+"yessssssssssssssss")
+    # print(str(ii)+"yessssssssssssssss")
     r = requests.request('GET', URL, headers=h, stream=True)
     htmlstr = str(r.content)
     temp0 = htmlstr[res[ii]:res[ii] + 369].find('href="')
     temp1 = htmlstr[res[ii]:res[ii] + 369].find('class="ga"')
-    url = "https://www.lynda.com" + htmlstr[res[ii] + temp0 + 6:res[ii] + temp1 - 2]
+    url = "https://www.lynda.com" + \
+        htmlstr[res[ii] + temp0 + 6:res[ii] + temp1 - 2]
     print(" ")
     print(url)
     r = requests.request('GET', url, headers=h, stream=True)
@@ -313,8 +326,9 @@ for ii in range(templ,res.__len__()):
     temp = htmlstr.index('data-course="')
     courseName = str(ii) + ". " + htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index(
         '"')].split("\\")[0].strip() + " (" + courseDuration + ")"
-    courseName=html.unescape(validname(courseName))
-    courseId = htmlstr[htmlstr.index("/"):htmlstr.index('ios')].split('>')[1][88:-3]
+    courseName = html.unescape(validname(courseName))
+    courseId = htmlstr[htmlstr.index(
+        "/"):htmlstr.index('ios')].split('>')[1][88:-3]
     print("###" + courseName + "#####")
     print("Getting course details...")
     isExFile = True
@@ -332,12 +346,14 @@ for ii in range(templ,res.__len__()):
                 break
         exFileName = "exFile " + validname(courseName.replace(" ", "_"))
         exFileId = htmlstr[start + 9:i]
-        exFileLink = 'https://www.lynda.com/ajax/course/' + courseId + '/download/exercise/' + exFileId
+        exFileLink = 'https://www.lynda.com/ajax/course/' + \
+            courseId + '/download/exercise/' + exFileId
         exfilesize = getFileSize(exFileLink, h)
-        print("Exercise File: " + exFileName + "   [" + str(bytesToMb(exfilesize)) + "Mb]")
+        print("Exercise File: " + exFileName +
+              "   [" + str(bytesToMb(exfilesize)) + "Mb]")
     list = htmlstr[
-           htmlstr.index('course-toc toc-container autoscroll'):htmlstr.index(
-               'class="show-all"><span class="more ga"')].split(
+        htmlstr.index('course-toc toc-container autoscroll'):htmlstr.index(
+            'class="show-all"><span class="more ga"')].split(
         '<li role="presentation"')
     data = []
     t360 = 0
@@ -384,7 +400,8 @@ for ii in range(templ,res.__len__()):
     print("    [360p:" + str(bytesToMb(t360)) + "Mb, 540p:" + str(
         bytesToMb(t540)) + "Mb, 720p:" + str(bytesToMb(t720)) + "Mb]")
     while (not (quality == "0" or quality == "1" or quality == "2")):
-        quality = input("Enter video quality (0 for 360p, 1 for 540p or 2 for 720p) : ")
+        quality = input(
+            "Enter video quality (0 for 360p, 1 for 540p or 2 for 720p) : ")
     quality = int(quality)
 
     if quality == 0:
@@ -404,4 +421,3 @@ filew.close()
 filewtt.close()
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
 input("Press any key to exit :)")
-
