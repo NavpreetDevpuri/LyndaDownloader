@@ -1,16 +1,20 @@
 import time
 import os
 import sys
+import re
 import requests
 import html
-cookies = 'bcookie=d90ecacc92e7409c80978e8d5b43f7c768fab2b2bc4b492e89e5e7406af1d765; throttle-f9151a904e07fa0812b7b9fb20b6f1ab=1; throttle-66ae19c25d337eab52ef80bb97b39dd7=1; throttle-7566ffb605d4cb8c15225d8859a6efd3=1; throttle-b8b96eed8d81f42a88aadaadc5139c25=1; litrk-srcveh=srcValue=direct/none&vehValue=direct/none&prevSrc=&prevVeh=; throttle-d3ebbd09ec7ecff8c4948ff79599614d=1; throttle-9620ede73ab0b3b8d0fe1e62763ad939=1; throttle-ad15fee1459e8f3e1ae3d8d711f77883=1; throttle-20fc2dfb0a81016faeebb960e94da216=1; _ga=GA1.2.1213291284.1593592511; throttle-2fa0e9b608dffa03090202330a823d2c=1; throttle-54c678a5add39d58a7d7411cae569603=1; show-member-tour-cta=true; throttle-7f0c15d211a720cccfeff5e84db0ec6e=1; SSOLogin=OrgUrl=https%3A%2F%2Fwww.lynda.com%2Fportal%2Fsip%3Forg%3Ddetroitpubliclibrary.org&OrgName=Detroit%20Public%20Library; throttle-2b03d60a3a4380742663b5f4066e4d2a=1; throttle-5348dd4a563290f2f066ced19befea6a=2; throttle-34d6c36979b1bc5f735cf8382b5963ae=1; throttle-81caf7c4bbc10c18b29b105cfcbcdbee=1; throttle-3c6decaab331b0e589231f32fc4b9a84=1; throttle-b8b1cb3ef236f57532c515db9614be44=1; throttle-a5ca6acbd2f547f2914c0b113231bee3=1; throttle-47481a8f590db61e7b4703e070ade640=1; throttle-9ecc4e578ac856334c0a44bd43f10619=1; throttle-85975e5888b0a2a3d27c273fd5637879=1; throttle-cb8048294d8a62ec98a5d38754e4a964=1; throttle-fcc41b5952df7ea0746eff3c71b72bc7=1; throttle-bf01e020137cb85eaa7a5e6a2f331834=1; throttle-cc6e24142c9b2f691b86349a86409bdb=1; tcookie=3f4446b4-8a17-410b-b023-d26724cb5bf1; signin-tooltip=2; throttle-1541cf51b317649a0e2e58b81f433f80=1; throttle-e0cb8e4541d2401ae2437d4836b8d8cd=1; player_settings_1995203570_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=540; recentSearches=%5B%7B%22Name%22%3A%22appium%22%7D%2C%7B%22Name%22%3A%22backdoor%22%7D%2C%7B%22Name%22%3A%22adobe%20xd%22%7D%5D; _gid=GA1.2.997610656.1596366075; player_settings_0_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=0; LyndaAccess=LyndaAccess=8/2/2020 4:01:31 AM&p=0&data=9,11/8/2020,1,191505; LyndaLoginStatus=Member-Logged-In; player=%7B%22volume%22%3A0.72%2C%22muted%22%3Afalse%2C%22quality%22%3A360%2C%22ccLang%22%3A%22en%22%7D; token=ce652b95-e853-4d20-a89f-b8d1020714b5,7344e22e7573eed45e017aedc79f1aad,IpRCid2VjBav/Wq+sePOlm55CuM8lq6DXZ3TrhbE0LebnoQSRq1hNH0svkmen7X8xpwlyAH0IxaLMAaYd9nWklje6GPG/B1K0jQueyhUCpk2ViMl4g5s3CjsPK9DOf82hupHDOafFStuPSqtnuJEiQ==; NSC_ed11_xxx-iuuqt_wt=ffffffff096d9e2845525d5f4f58455e445a4a423661; ncp=1; _gat=1'
-cookies = input("Enter cookies string: ")
-#import readline
-#readline.parse_and_bind("control-v: paste")
+# import readline
 quality = " "
 url = " "
 savedir = " "
-#url = 'https://www.lynda.com/Developer-tutorials/Advanced-Appium/2244044-2.html'
+# cookies = 'bcookie=c535c4dcac2948ada83a1bfba1e319d1a2c9face066045578e9f130be865efcd; throttle-f9151a904e07fa0812b7b9fb20b6f1ab=1; litrk-srcveh=srcValue=direct/none&vehValue=direct/none&prevSrc=&prevVeh=; throttle-b8b96eed8d81f42a88aadaadc5139c25=1; throttle-66ae19c25d337eab52ef80bb97b39dd7=1; throttle-54c678a5add39d58a7d7411cae569603=1; throttle-7566ffb605d4cb8c15225d8859a6efd3=1; throttle-20fc2dfb0a81016faeebb960e94da216=1; show-member-tour-cta=true; throttle-7f0c15d211a720cccfeff5e84db0ec6e=1; SSOLogin=OrgUrl=https%3A%2F%2Fwww.lynda.com%2Fportal%2Fsip%3Forg%3Ddetroitpubliclibrary.org&OrgName=Detroit%20Public%20Library; throttle-2b03d60a3a4380742663b5f4066e4d2a=1; player_settings_1995203661_7=player_type=2&video_format=2&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=540; throttle-5348dd4a563290f2f066ced19befea6a=2; throttle-34d6c36979b1bc5f735cf8382b5963ae=1; throttle-d3ebbd09ec7ecff8c4948ff79599614d=1; throttle-81caf7c4bbc10c18b29b105cfcbcdbee=1; throttle-3c6decaab331b0e589231f32fc4b9a84=1; throttle-b8b1cb3ef236f57532c515db9614be44=1; _ga=GA1.2.1213302327.1584204133; throttle-e0cb8e4541d2401ae2437d4836b8d8cd=1; throttle-9ecc4e578ac856334c0a44bd43f10619=1; throttle-85975e5888b0a2a3d27c273fd5637879=1; throttle-cb8048294d8a62ec98a5d38754e4a964=1; throttle-fcc41b5952df7ea0746eff3c71b72bc7=1; throttle-bf01e020137cb85eaa7a5e6a2f331834=1; throttle-cc6e24142c9b2f691b86349a86409bdb=1; tcookie=564c1c56-cb0d-435e-8b47-a72dff0d6250; throttle-9620ede73ab0b3b8d0fe1e62763ad939=1; throttle-ad15fee1459e8f3e1ae3d8d711f77883=1; _gid=GA1.2.1114134994.1584342457; throttle-2fa0e9b608dffa03090202330a823d2c=1; throttle-a5ca6acbd2f547f2914c0b113231bee3=1; throttle-47481a8f590db61e7b4703e070ade640=1; throttle-1541cf51b317649a0e2e58b81f433f80=1; signin-tooltip=2; throttle-5e100fc1cdc0162455722c3ef7edca5a=1; throttle-58c6d8583842e489e0411b9a1aad7aae=1; recentSearches=%5B%7B%22Name%22%3A%22become%20a%20cinematographer%22%7D%2C%7B%22Name%22%3A%22become%20a%20cinamatographer%22%7D%2C%7B%22Name%22%3A%22health%22%7D%5D; player=%7B%22volume%22%3A0.19%2C%22muted%22%3Afalse%2C%22quality%22%3A360%7D; throttle-e7312ef91bb8dfd0ade8949fdae3ed9c=1; NSC_tw5_xxx-iuuqt_wt=ffffffff096e9e5145525d5f4f58455e445a4a423661; _gat=1; plugin_list=; player_settings_0_7=player_type=2&video_format=2&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=0; token=7f5e6277-f9a5-4d85-83cf-f6dcef5eae78,cff657bdbca0b435ba16be073bb9ce50,CdE7i/FbG6VOVawF55Keo/rdBbrV+QuWtPC5SX3HmoRDCNBit4iS6qFcWLjEFg+03nM0qRi8+2Nif88Jt2oKZ1LpXb3c5Y6rk/T40xEzh0ht3aH25LJAXZiCtxfyOBB83+j9gZh8+wfWUW8O/3SOlA==; LyndaAccess=LyndaAccess=3/22/2020 5:33:48 AM&p=0&data=9,11/8/2020,1,191505; LyndaLoginStatus=Member-Logged-In; ncp=1'
+# url = 'https://www.lynda.com/learning-paths/Developer/become-an-arduino-developer'
+# quality = "2"
+cookies = input("Enter cookies string: ")
+# readline.parse_and_bind("control-v: paste")
+# url='https://www.lynda.com/learning-paths/Video/become-a-film-producer'
+
 print("Made by NavpreetDevpuri.")
 print("Enjoy ;)")
 fromfolder = 1
@@ -44,8 +48,8 @@ while (i < arglen - 1):
             "invalid argumnets. Read about arguments on github: https://github.com/NavpreetDevpuri/LyndaDownloader\n Try angain :)")
 
 if url == " ":
-    print("Eg. https://www.lynda.com/Python-tutorials/Programming-Fundamentals-Real-World/418249-2.html")
-    url = input("Enter Lynda.com course link: ")
+    print("Eg. https://www.lynda.com/learning-paths/Video/become-a-film-producer")
+    url = input("Enter Lynda.com learning-path link: ")
 if savedir == " ":
     savedir = os.path.join(os.path.dirname(
         os.path.realpath(__file__)), "Lynda")
@@ -72,6 +76,7 @@ downloadedsize = 0
 
 def download(nn=0):
     global data, courseName, quality, qualities, downloadsize, downloadedsize
+
     try:
         filer = open("temp.txt", "r")
         cont = filer.read()
@@ -103,13 +108,13 @@ def download(nn=0):
     coursedir = os.path.join(savedir, courseName + " " + qualities[quality])
     os.makedirs(coursedir, exist_ok=True)
     mm = 0
-    counter = -1
     for i in range(data.__len__()):
         folderName = validname(data[i][0])
         folderdir = os.path.join(coursedir, folderName)
         os.makedirs(folderdir, exist_ok=True)
         print(folderName + ":")
         for j in range(data[i][1].__len__()):
+
             try:
                 data[i][1][j][1][1][quality]
             except:
@@ -127,9 +132,12 @@ def download(nn=0):
             if mm < nn:
                 mm = mm+1
                 continue
+            # print(videolink)
             dowloadFile(os.path.join(folderdir, videoname + ".mp4"), videolink)
+            dowloadFile(os.path.join(folderdir, videoname + ".srt"),
+                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h)
             ct = ct+1
-            #print('downloadedsize='+str(downloadedsize), "ct=",ct)
+            # print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
             filew.close()
             filew = open("temp.txt", "a+")
@@ -171,6 +179,7 @@ def dowloadFile(name, link, header=None):
 
 
 def getVideosLinks():
+
     print("Getting videos details...")
     global fromfolder, data, htmlstr, t360, t540, t720
     for i in range(data.__len__()):
@@ -219,7 +228,6 @@ def getVideosLinks():
             t540 += temp540
             t720 += temp720
             data[i][1][j][1].append([temp360, temp540, temp720])
-
     print(" ")
     if isExFile:
         print("Exercise File: " + exFileName +
@@ -238,7 +246,7 @@ def getCoursedetails():
         folderName = html.unescape(list[i][list[i].index(
             '<h4'):list[i].index('</h4')].split('>')[1])
         print(folderName + ":")
-        data.append([(validname(folderName)), []])
+        data.append([validname(folderName), []])
         videosList = list[i].split('row toc-items')[1].split('<li')
         totalVideos += videosList.__len__() - 1
         for j in range(1, videosList.__len__()):
@@ -263,102 +271,153 @@ def getCoursedetails():
 
 
 print("Connecting to Lynda.com...")
-r = requests.request('GET', url, headers=h, stream=True)
+URL = url
+r = requests.request('GET', URL, headers=h, stream=True)
 htmlstr = str(r.content)
 print("Collecting information...")
-temp = htmlstr.index('timeRequired')
-courseDuration = htmlstr[temp:temp + 55].split('>')[1].split('<')[0]
-temp = htmlstr.index('data-course="')
-courseName = validname(html.unescape(htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index(
-    '"')].split("\\")[0].strip() + " (" + courseDuration + ")"))
-courseId = htmlstr[htmlstr.index(
-    "/"):htmlstr.index('ios')].split('>')[1][88:-3]
-print("###" + courseName + "#####")
-print("Getting course details...")
-isExFile = True
-try:
-    start = htmlstr.index("exercise/")
-except:
-    isExFile = False
-if isExFile:
-    i = start
-    while (True):
-        i += 1
-        if htmlstr[i] != '"':
-            continue
-        else:
-            break
-    exFileName = "exFile " + validname(courseName.replace(" ", "_"))
-    exFileId = htmlstr[start + 9:i]
-    exFileLink = 'https://www.lynda.com/ajax/course/' + \
-        courseId + '/download/exercise/' + exFileId
-    exfilesize = getFileSize(exFileLink, h)
-    print("Exercise File: " + exFileName +
-          "   [" + str(bytesToMb(exfilesize)) + "Mb]")
-list = htmlstr[
-    htmlstr.index('course-toc toc-container autoscroll'):htmlstr.index('class="show-all"><span class="more ga"')].split(
-    '<li role="presentation"')
-data = []
-t360 = 0
-t540 = 0
-t720 = 0
-totalVideos = 0
-getCoursedetails()
+res = [i.start() for i in re.finditer('item-details', htmlstr)]
+temp0 = htmlstr.index('h1')
+temp1 = htmlstr[temp0+3:temp0+144].index("</h1>")
+lpname = html.unescape(
+    validname(htmlstr[temp0+3:temp0+3+temp1].split("\\")[0].strip()))
+savedir = os.path.join(savedir, lpname)
 
 try:
-    filer = open("temp.txt", "r")
+    filer = open("tempt.txt", "r")
     cont = filer.read()
     filer.close()
 except:
-    cont = ""
-tcourseName = ""
+    cont = ''
+temp = cont.split("\n")
+cont = ''
+for i in range(temp.__len__() - 1, -1, -1):
+    if temp[i] != '':
+        cont = temp[i]
+        break
 # print(cont)
+tlpname = ""
 if cont != "":
-    tcourseName = cont.split(",")[0]
-if tcourseName != courseName:
-    getVideosLinks()
+    temp = cont.split(",")
+    tlpname = temp[0]
+    templ = int(temp[1])
+if tlpname != lpname:
+    templ = 0
+    filer = open("tempt.txt", "w")
+    filer.close()
+
+filewtt = open("tempt.txt", "a+")
+for ii in range(templ, res.__len__()):
+    filewtt.write(lpname+","+str(ii)+"\n")
+    filewtt.close()
+    filewtt = open("tempt.txt", "a+")
+    # print(str(ii)+"yessssssssssssssss")
+    r = requests.request('GET', URL, headers=h, stream=True)
+    htmlstr = str(r.content)
+    temp0 = htmlstr[res[ii]:res[ii] + 369].find('href="')
+    temp1 = htmlstr[res[ii]:res[ii] + 369].find('class="ga"')
+    url = "https://www.lynda.com" + \
+        htmlstr[res[ii] + temp0 + 6:res[ii] + temp1 - 2]
+    print(" ")
+    print(url)
+    r = requests.request('GET', url, headers=h, stream=True)
+    htmlstr = str(r.content)
+    temp = htmlstr.index('timeRequired')
+    courseDuration = htmlstr[temp:temp + 55].split('>')[1].split('<')[0]
+    temp = htmlstr.index('data-course="')
+    courseName = str(ii) + ". " + htmlstr[temp + 13:temp + 13 + htmlstr[temp + 13:temp + 144].index(
+        '"')].split("\\")[0].strip() + " (" + courseDuration + ")"
+    courseName = html.unescape(validname(courseName))
+    courseId = htmlstr[htmlstr.index(
+        "/"):htmlstr.index('ios')].split('>')[1][88:-3]
+    print("###" + courseName + "#####")
+    print("Getting course details...")
+    isExFile = True
+    try:
+        start = htmlstr.index("exercise/")
+    except:
+        isExFile = False
+    if isExFile:
+        i = start
+        while (True):
+            i += 1
+            if htmlstr[i] != '"':
+                continue
+            else:
+                break
+        exFileName = "exFile " + validname(courseName.replace(" ", "_"))
+        exFileId = htmlstr[start + 9:i]
+        exFileLink = 'https://www.lynda.com/ajax/course/' + \
+            courseId + '/download/exercise/' + exFileId
+        exfilesize = getFileSize(exFileLink, h)
+        print("Exercise File: " + exFileName +
+              "   [" + str(bytesToMb(exfilesize)) + "Mb]")
+    list = htmlstr[
+        htmlstr.index('course-toc toc-container autoscroll'):htmlstr.index(
+            'class="show-all"><span class="more ga"')].split(
+        '<li role="presentation"')
+    data = []
+    t360 = 0
+    t540 = 0
+    t720 = 0
+    totalVideos = 0
+    getCoursedetails()
+
+    try:
+        filer = open("temp.txt", "r")
+        cont = filer.read()
+        filer.close()
+    except:
+        cont = ""
+    tcourseName = ""
+    # print(cont)
+    if cont != "":
+        tcourseName = cont.split(",")[0]
+    if tcourseName != courseName:
+        getVideosLinks()
+        file = open("data.txt", "w")
+        file.write(str(data) + "\n")
+        file.write(str(t360) + "," + str(t540) + "," + str(t720) + "\n")
+        file.close()
+        filew = open("temp.txt", "w")
+        filew.write(courseName + "," + str(0) + "," + str(0) + "\n")
+        filew.close()
+
+    # if isExFile:
+    # downloadsize += exfilesize
+    # print(data)
+    # download()
+
+    file = open("data.txt", "r")
+    contents = file.read()
+    file.close()
+    temp = contents.split("\n")
+    data = eval(temp[0])
+
+    t360, t540, t720 = temp[1].split(",")
+    t360 = int(t360)
+    t540 = int(t540)
+    t720 = int(t720)
+    print("    [360p:" + str(bytesToMb(t360)) + "Mb, 540p:" + str(
+        bytesToMb(t540)) + "Mb, 720p:" + str(bytesToMb(t720)) + "Mb]")
+    while (not (quality == "0" or quality == "1" or quality == "2")):
+        quality = input(
+            "Enter video quality (0 for 360p, 1 for 540p or 2 for 720p) : ")
+    quality = int(quality)
+
+    if quality == 0:
+        downloadsize = t360
+    elif quality == 1:
+        downloadsize = t540
+    else:
+        downloadsize = t720
+    download()
+    quality = ""+str(quality)
     file = open("data.txt", "w")
-    file.write(str(data) + "\n")
-    file.write(str(t360) + "," + str(t540) + "," + str(t720) + "\n")
     file.close()
     filew = open("temp.txt", "w")
-    filew.write(courseName + "," + str(0) + "," + str(0)+"\n")
     filew.close()
-
-
-# if isExFile:
-    #downloadsize += exfilesize
-# print(data)
-# download()
-
-file = open("data.txt", "r")
-contents = file.read()
-file.close()
-temp = contents.split("\n")
-data = eval(temp[0])
-
-t360, t540, t720 = temp[1].split(",")
-t360 = int(t360)
-t540 = int(t540)
-t720 = int(t720)
-print("    [360p:" + str(bytesToMb(t360)) + "Mb, 540p:" + str(
-    bytesToMb(t540)) + "Mb, 720p:" + str(bytesToMb(t720)) + "Mb]")
-while (not (quality == "0" or quality == "1" or quality == "2")):
-    quality = input(
-        "Enter video quality (0 for 360p, 1 for 540p or 2 for 720p) : ")
-quality = int(quality)
-
-if quality == 0:
-    downloadsize = t360
-elif quality == 1:
-    downloadsize = t540
-else:
-    downloadsize = t720
-download()
-file = open("data.txt", "w")
-file.close()
-filew = open("temp.txt", "w")
+filew = open("tempt.txt", "w")
 filew.close()
-
+filewtt.close()
 print("time elapsed: {:.2f}s".format(time.time() - start_time))
 input("Press any key to exit :)")
