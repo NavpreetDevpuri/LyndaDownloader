@@ -128,8 +128,6 @@ def download(nn=0):
                 mm = mm+1
                 continue
             dowloadFile(os.path.join(folderdir, videoname + ".mp4"), videolink)
-            dowloadFile(os.path.join(folderdir, videoname + ".srt"),
-                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h)
             ct = ct+1
             #print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
