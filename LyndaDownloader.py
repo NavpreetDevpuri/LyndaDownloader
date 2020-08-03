@@ -3,14 +3,14 @@ import os
 import sys
 import requests
 import html
-cookies = 'bcookie=d90ecacc92e7409c80978e8d5b43f7c768fab2b2bc4b492e89e5e7406af1d765; throttle-f9151a904e07fa0812b7b9fb20b6f1ab=1; throttle-66ae19c25d337eab52ef80bb97b39dd7=1; throttle-7566ffb605d4cb8c15225d8859a6efd3=1; throttle-b8b96eed8d81f42a88aadaadc5139c25=1; litrk-srcveh=srcValue=direct/none&vehValue=direct/none&prevSrc=&prevVeh=; throttle-d3ebbd09ec7ecff8c4948ff79599614d=1; throttle-9620ede73ab0b3b8d0fe1e62763ad939=1; throttle-ad15fee1459e8f3e1ae3d8d711f77883=1; throttle-20fc2dfb0a81016faeebb960e94da216=1; _ga=GA1.2.1213291284.1593592511; throttle-2fa0e9b608dffa03090202330a823d2c=1; throttle-54c678a5add39d58a7d7411cae569603=1; show-member-tour-cta=true; throttle-7f0c15d211a720cccfeff5e84db0ec6e=1; SSOLogin=OrgUrl=https%3A%2F%2Fwww.lynda.com%2Fportal%2Fsip%3Forg%3Ddetroitpubliclibrary.org&OrgName=Detroit%20Public%20Library; throttle-2b03d60a3a4380742663b5f4066e4d2a=1; throttle-5348dd4a563290f2f066ced19befea6a=2; throttle-34d6c36979b1bc5f735cf8382b5963ae=1; throttle-81caf7c4bbc10c18b29b105cfcbcdbee=1; throttle-3c6decaab331b0e589231f32fc4b9a84=1; throttle-b8b1cb3ef236f57532c515db9614be44=1; throttle-a5ca6acbd2f547f2914c0b113231bee3=1; throttle-47481a8f590db61e7b4703e070ade640=1; throttle-9ecc4e578ac856334c0a44bd43f10619=1; throttle-85975e5888b0a2a3d27c273fd5637879=1; throttle-cb8048294d8a62ec98a5d38754e4a964=1; throttle-fcc41b5952df7ea0746eff3c71b72bc7=1; throttle-bf01e020137cb85eaa7a5e6a2f331834=1; throttle-cc6e24142c9b2f691b86349a86409bdb=1; tcookie=3f4446b4-8a17-410b-b023-d26724cb5bf1; signin-tooltip=2; throttle-1541cf51b317649a0e2e58b81f433f80=1; throttle-e0cb8e4541d2401ae2437d4836b8d8cd=1; player_settings_1995203570_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=540; recentSearches=%5B%7B%22Name%22%3A%22appium%22%7D%2C%7B%22Name%22%3A%22backdoor%22%7D%2C%7B%22Name%22%3A%22adobe%20xd%22%7D%5D; _gid=GA1.2.997610656.1596366075; player_settings_0_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=0; LyndaAccess=LyndaAccess=8/2/2020 4:01:31 AM&p=0&data=9,11/8/2020,1,191505; LyndaLoginStatus=Member-Logged-In; player=%7B%22volume%22%3A0.72%2C%22muted%22%3Afalse%2C%22quality%22%3A360%2C%22ccLang%22%3A%22en%22%7D; token=ce652b95-e853-4d20-a89f-b8d1020714b5,7344e22e7573eed45e017aedc79f1aad,IpRCid2VjBav/Wq+sePOlm55CuM8lq6DXZ3TrhbE0LebnoQSRq1hNH0svkmen7X8xpwlyAH0IxaLMAaYd9nWklje6GPG/B1K0jQueyhUCpk2ViMl4g5s3CjsPK9DOf82hupHDOafFStuPSqtnuJEiQ==; NSC_ed11_xxx-iuuqt_wt=ffffffff096d9e2845525d5f4f58455e445a4a423661; ncp=1; _gat=1'
+cookies = 'bcookie=d90ecacc92e7409c80978e8d5b43f7c768fab2b2bc4b492e89e5e7406af1d765; throttle-f9151a904e07fa0812b7b9fb20b6f1ab=1; throttle-66ae19c25d337eab52ef80bb97b39dd7=1; throttle-7566ffb605d4cb8c15225d8859a6efd3=1; throttle-b8b96eed8d81f42a88aadaadc5139c25=1; litrk-srcveh=srcValue=direct/none&vehValue=direct/none&prevSrc=&prevVeh=; throttle-d3ebbd09ec7ecff8c4948ff79599614d=1; throttle-9620ede73ab0b3b8d0fe1e62763ad939=1; throttle-ad15fee1459e8f3e1ae3d8d711f77883=1; throttle-20fc2dfb0a81016faeebb960e94da216=1; _ga=GA1.2.1213291284.1593592511; throttle-2fa0e9b608dffa03090202330a823d2c=1; throttle-54c678a5add39d58a7d7411cae569603=1; show-member-tour-cta=true; throttle-7f0c15d211a720cccfeff5e84db0ec6e=1; SSOLogin=OrgUrl=https%3A%2F%2Fwww.lynda.com%2Fportal%2Fsip%3Forg%3Ddetroitpubliclibrary.org&OrgName=Detroit%20Public%20Library; throttle-2b03d60a3a4380742663b5f4066e4d2a=1; throttle-5348dd4a563290f2f066ced19befea6a=2; throttle-34d6c36979b1bc5f735cf8382b5963ae=1; throttle-81caf7c4bbc10c18b29b105cfcbcdbee=1; throttle-3c6decaab331b0e589231f32fc4b9a84=1; throttle-b8b1cb3ef236f57532c515db9614be44=1; throttle-a5ca6acbd2f547f2914c0b113231bee3=1; throttle-47481a8f590db61e7b4703e070ade640=1; throttle-9ecc4e578ac856334c0a44bd43f10619=1; throttle-85975e5888b0a2a3d27c273fd5637879=1; throttle-cb8048294d8a62ec98a5d38754e4a964=1; throttle-fcc41b5952df7ea0746eff3c71b72bc7=1; throttle-bf01e020137cb85eaa7a5e6a2f331834=1; throttle-cc6e24142c9b2f691b86349a86409bdb=1; tcookie=3f4446b4-8a17-410b-b023-d26724cb5bf1; signin-tooltip=2; throttle-1541cf51b317649a0e2e58b81f433f80=1; throttle-e0cb8e4541d2401ae2437d4836b8d8cd=1; player_settings_1995203570_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=540; _gid=GA1.2.997610656.1596366075; player=%7B%22volume%22%3A0.72%2C%22muted%22%3Afalse%2C%22quality%22%3A360%2C%22ccLang%22%3A%22en%22%7D; ncp=1; ASP.NET_SessionId=; plugin_list=; player_settings_0_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=0; portalLandingPage=wHO4W19h45pZzfvinoY5G5BUg834VFAgsIiMNeFJJ0RDDOufFccLyofseTNya48z5P8aN1IZmKTk/xo3UhmYpOT/GjdSGZik8WCIij0pwGoc74kbnLUAHxuHXThmzNrxyEbKVVsLWb2KIQWpEduDvpzo0ix0aByUThABrjttjL1Ya1FtYPQXWWS1W9qWPKXzW++M4v81i843D+i/v91hKyg9TNUy4vutsLOEa5rY+GWcmAC6ViaHBwZ4Ufq6Wn/Z; player_settings_1995412271_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=540; throttle-5e100fc1cdc0162455722c3ef7edca5a=1; throttle-58c6d8583842e489e0411b9a1aad7aae=1; throttle-73d0d65c83910c63723931a8960de142=1; throttle-f5a490e5b1060189d91af607a6222fb8=1; throttle-6d224299407bfb31a5838d5586143992=1; throttle-a08346b1d77e5ed99edf7159d1d154d9=1; throttle-a64030d4f0078f1211744e69b24c818f=1; player_settings_1995203661_2=player_type=2&video_format=1&cc_status=2&window_extra_height=148&volume_percentage=50&resolution=540; LyndaAccess=LyndaAccess=8/2/2020 10:46:39 AM&p=0&data=9,11/8/2020,1,191505; LyndaLoginStatus=Member-Logged-In; token=0aeae9a1-e1f8-4f8b-8cf3-1d55cfc9f952,096a74705a0ecae4cad5cc973c624396,IpRCid2VjBav/Wq+sePOlm55CuM8lq6DXZ3TrhbE0Lfcdl9McURzJjy7UhXoMnswrR4EKRjPelrQGzw6srUUroF4RfHK1AAUSqdvsVyl3RjCJcg+oiHzLdu2FStB5kG+59HixaR2PG4l4fJ4rlgKFQ==; NSC_ed11_xxx-iuuqt_wt=ffffffff096d9e2a45525d5f4f58455e445a4a423661; recentSearches=%5B%7B%22Name%22%3A%22%5Cn%5Ct%5Ct%5Ct%5Ct%5Cn%5Ct%5Ct%5Ct%5Ctjava%5Cn%5Ct%5Ct%5Ct%22%2C%22Type%22%3A4%7D%2C%7B%22Name%22%3A%22java%22%7D%2C%7B%22Name%22%3A%22appium%22%7D%5D; _gat=1'
 cookies = input("Enter cookies string: ")
-#import readline
-#readline.parse_and_bind("control-v: paste")
+# import readline
+# readline.parse_and_bind("control-v: paste")
 quality = " "
 url = " "
 savedir = " "
-#url = 'https://www.lynda.com/Developer-tutorials/Advanced-Appium/2244044-2.html'
+#url = 'https://www.lynda.com/Java-tutorials/Learning-Java/2825378-2.html'
 print("Made by NavpreetDevpuri.")
 print("Enjoy ;)")
 fromfolder = 1
@@ -129,9 +129,9 @@ def download(nn=0):
                 continue
             dowloadFile(os.path.join(folderdir, videoname + ".mp4"), videolink)
             dowloadFile(os.path.join(folderdir, videoname + ".srt"),
-                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h)
+                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h, showOutput=False)
             ct = ct+1
-            #print('downloadedsize='+str(downloadedsize), "ct=",ct)
+            # print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
             filew.close()
             filew = open("temp.txt", "a+")
@@ -149,7 +149,7 @@ def getFileSize(link, h=None):
     return int(r.headers['Content-length'])
 
 
-def dowloadFile(name, link, header=None):
+def dowloadFile(name, link, header=None, showOutput=True):
     global downloadedsize, downloadsize
     r = requests.request('GET', link, headers=header, stream=True)
     f = open(name, 'wb')
@@ -163,12 +163,13 @@ def dowloadFile(name, link, header=None):
         status = round(sizet / size * 100, 3)
         downloadedsize += s
         alloverp = round(downloadedsize / downloadsize * 100, 3)
-        print('\r %.2f%% (%.2fMb/%.2fMb)  Allover:%.2f%% (%.2fMb/%.2fMb)' % (
-            status, bytesToMb(sizet), bytesToMb(
-                size), alloverp, round(bytesToMb(downloadedsize), 2),
-            round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
-
-    print(" ")
+        if showOutput:
+            print('\r %.2f%% (%.2fMb/%.2fMb)  Allover:%.2f%% (%.2fMb/%.2fMb)' % (
+                status, bytesToMb(sizet), bytesToMb(
+                    size), alloverp, round(bytesToMb(downloadedsize), 2),
+                round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
+    if showOutput:
+        print(" ")
     f.close()
 
 
@@ -329,7 +330,7 @@ if tcourseName != courseName:
 
 
 # if isExFile:
-    #downloadsize += exfilesize
+    # downloadsize += exfilesize
 # print(data)
 # download()
 
