@@ -135,7 +135,7 @@ def download(nn=0):
             # print(videolink)
             dowloadFile(os.path.join(folderdir, videoname + ".mp4"), videolink)
             dowloadFile(os.path.join(folderdir, videoname + ".srt"),
-                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h)
+                        'https://www.lynda.com/ajax/player/transcript?courseId=' + courseId + '&videoId=' + data[i][1][j][1][0], header=h, showOutput=False)
             ct = ct+1
             # print('downloadedsize='+str(downloadedsize), "ct=",ct)
             filew.write(courseName+","+str(downloadedsize)+","+str(ct)+"\n")
@@ -155,7 +155,7 @@ def getFileSize(link, h=None):
     return int(r.headers['Content-length'])
 
 
-def dowloadFile(name, link, header=None):
+def dowloadFile(name, link, header=None, showOutput=True):
     global downloadedsize, downloadsize
     r = requests.request('GET', link, headers=header, stream=True)
     f = open(name, 'wb')
@@ -169,12 +169,13 @@ def dowloadFile(name, link, header=None):
         status = round(sizet / size * 100, 3)
         downloadedsize += s
         alloverp = round(downloadedsize / downloadsize * 100, 3)
-        print('\r %.2f%% (%.2fMb/%.2fMb)  Allover:%.2f%% (%.2fMb/%.2fMb)' % (
-            status, bytesToMb(sizet), bytesToMb(
-                size), alloverp, round(bytesToMb(downloadedsize), 2),
-            round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
-
-    print(" ")
+        if showOutput:
+            print('\r %.2f%% (%.2fMb/%.2fMb)  Allover:%.2f%% (%.2fMb/%.2fMb)' % (
+                status, bytesToMb(sizet), bytesToMb(
+                    size), alloverp, round(bytesToMb(downloadedsize), 2),
+                round(bytesToMb(downloadsize), 2)), end=' ', flush=True)
+    if showOutput:
+        print(" ")
     f.close()
 
 
