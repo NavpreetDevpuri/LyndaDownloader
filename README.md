@@ -6,6 +6,7 @@
  3. If some error occurred or stoped while downloading then just restart python script it will repause download.
  4. If you started downloading some course then finish it as soon as possible because after some time link will be expire.
 
+Sorry, But This new account maker is not working anymore! 
 ### Step 1) register new card from [here](https://detp.ent.sirsi.net/client/en_US/default/search/registration/$N/SYMWS/true?) and get your card number. if you have an account then continue from step 3.
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/01.jpg)
 ![step 1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/02.jpg)
