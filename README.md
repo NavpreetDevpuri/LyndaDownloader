@@ -13,7 +13,7 @@
 [step 2.1](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/03.jpg), 
 [step 2.2](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/04.jpg), 
 [step 2.3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/05.jpg), 
-[step 2.4](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/06.jpg),  
+[step 2.4](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/06.jpg), 
 [step 2.5](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/07.jpg)
 ### Step 3) open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
