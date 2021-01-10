@@ -26,7 +26,7 @@ python 'C:\Users\navpreetdevpuri\Downloads\LyndaDownloader.py' -url 'https://www
 ```
 
 
-## On Android
+## On Android (Its better to use Pydroid 3 instead of Termux)
 ##### You can also run this script in android (How to run python script on android ?)
 1. Download and install **Termux** app. (remember to give *storage permission* from phone's settings and *turn off battery optimization* for Termux app to make app run long)
 2. Run following commads : 
