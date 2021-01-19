@@ -63,7 +63,7 @@ h = {
 def validname(name):
     return name.replace('|', '').replace('>', '').replace('<', '').replace('"', '').replace('?', '').replace('*',
                                                                                                              '').replace(
-        ':', '').replace('/', '').replace('\\', '').replace("\r", "").replace("\n", "").replace("\t", "")
+        ':', '').replace('/', '').replace('\\', '').replace("\r", "").replace("\n", "").replace("\t", "").replace(",","")
 
 
 qualities = ["360p", "540p", "720p"]
