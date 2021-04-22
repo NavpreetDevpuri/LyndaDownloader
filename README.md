@@ -6,8 +6,8 @@
  3. If some error occurred or stoped while downloading then just restart python script it will repause download.
  4. If you started downloading some course then finish it as soon as possible because after some time link will be expire.
 
-### Step 1) register new card from [here](https://www.spl.org/using-the-library/get-started/get-started-with-a-library-card/library-card-application) and get your card number by using [this](https://www.fakeaddressgenerator.com/World_Address/get_us_address1). if you have an account then continue from step 3.
-### Step 2) login by using card number and password [here](https://www.lynda.com/portal/sip?org=spl.org&triedlogout=true)
+### Step 1) register new card from [here](https://find.sonomalibrary.org/custom/web/registration/index.html) and get your card number. if you have an account then continue from step 3.
+### Step 2) login by using card number and password [here](https://www.lynda.com/portal/sip?org=sonomalibrary.org)
 ### Step 3) open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
 
