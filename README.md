@@ -7,7 +7,40 @@
  4. If you started downloading some course then finish it as soon as possible because after some time link will be expire.
 
 ### Step 1) register new card from [here](https://find.sonomalibrary.org/custom/web/registration/index.html) and get your card number. if you have an account then continue from step 3.
+OR
+Just open browser console and run following script, It will generate ID
+```javascript
+console.log("Generating ID...");
+var res = await (await fetch("https://datas-1.sirsi.net/CTS/SON/selfRegistration.pl", {
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+    "cache-control": "max-age=0",
+    "content-type": "application/x-www-form-urlencoded",
+    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"90\", \"Google Chrome\";v=\"90\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "cross-site",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1"
+  },
+  "referrer": "https://find.sonomalibrary.org/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": `patron_firstName=John&patron_lastName=Bailey&patron_birthDateEntry=04%2F13%2F2000&patron_birthDate=2000-04-13&patronAddress1_STREET=PO+BOX+338&patronAddress_cityST=bn&patronAddress1_POSTALCODE=95415-0338&patronAddress1_PHONE_Entry=231-412-4123&patronAddress1_PHONE=2314124123&patronAddress1_EMAIL=sdfasdfds%40gmail.com&patronAddress1_EMAIL_CONFIRM=sdfasdfds%40gmail.com&patron_pin=1234&patron_confirmPin=1234&patron_library=wind&patronExtendedInformation_NOFITY_VIA=email&user_profile=PUBLIC&enterprise_locale=en_US&enterprise_profile=default&registrationSubmit=Register`,
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+})).text(); 
+var toFind = "eCard number is:";
+var startIndex = res.indexOf(toFind) + toFind.length + 1; 
+var endIndex = res.slice(startIndex).indexOf("</strong>");
+var cardNumber = res.slice(startIndex, startIndex + endIndex);
+console.log(`Login Link: https://www.lynda.com/portal/sip?org=sonomalibrary.org\nLibrary Card Number: ${cardNumber}\nPassword: 1234`) 
+```
 ### Step 2) login by using card number and password [here](https://www.lynda.com/portal/sip?org=sonomalibrary.org)
+
+
 ### Step 3) open chrome's devloper option by pressing ctrl + shift + I then open networking tab and play any video then find 'play' in 'Request Headers' and copy cookies (bcooklie=....etc)
 ![step 3](https://raw.githubusercontent.com/NavpreetDevpuri/LyndaDownloader/master/screenshots/08.jpg)
 
